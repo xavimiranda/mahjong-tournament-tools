@@ -1,20 +1,22 @@
-@if (seatingService.seatingMap()) {
-@for (round of seatingService.seatingMap()?.rounds; track $index) {
-<h4>Round {{$index+1}}</h4>
-<div class="d-flex flex-wrap">
+<div class="rounds">
 
-    @for(table of round; track $index) {
-    <div>
-        <p>Table {{$index + 1}}</p>
-        <ul>
-            @for (player of table; track player) {
-            <li>{{seatingService.getPlayerName(player)}}</li>
-            }
-        </ul>
+    @if (seatingService.seatingMap()) {
+    @for (round of seatingService.seatingMap()?.rounds; track $index) {
+    <h4>Round {{$index+1}}</h4>
+    <div class="d-flex flex-wrap">
+        @for(table of round; track $index) {
+        <div class="border border-dark p-3 m-1">
+            <p>Table {{$index + 1}}</p>
+            <ul>
+                @for (player of table; track player) {
+                <li>{{seatingService.getPlayerName(player)}}</li>
+                }
+            </ul>
+        </div>
+        }
     </div>
     }
+    } @else {
+    <p>Generate a seating map using the controls on the left</p>
+    }
 </div>
-}
-} @else {
-<p>Generate a seating map using the controls on the left</p>
-}
