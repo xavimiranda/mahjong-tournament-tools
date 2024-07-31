@@ -1,5 +1,8 @@
-
+@import "../../../styles/styles";
 .rounds {
+  @include media-breakpoint-up(md) {
     max-height: 100vh;
+    min-height: 100vh;
     overflow-y: scroll;
+  }
 }
