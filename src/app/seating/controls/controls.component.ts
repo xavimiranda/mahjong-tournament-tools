@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { SeatingService } from '../seating.service';
 import { FormsModule } from '@angular/forms';
-import * as Papa from 'papaparse';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @Component({
   selector: 'app-controls',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, NgxSpinnerModule],
   templateUrl: './controls.component.html',
   styleUrl: './controls.component.scss',
 })
@@ -15,7 +15,7 @@ export class ControlsComponent {
   playerCount = 0;
   rounds = 0;
 
-  generateSeatings() {
+  async generateSeatings() {
     this.seatingService.getSeatingChart(this.playerCount, this.rounds);
     this.seatingService.getPackedSeating()
   }

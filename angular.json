@@ -31,12 +31,14 @@
             ],
             "styles": [
               "node_modules/toastr/build/toastr.min.css",
+              "node_modules/ngx-spinner/animations/fire.css",
               "src/styles/styles.scss"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/toastr/build/toastr.min.js"
-            ]
+            ],
+            "webWorkerTsConfig": "tsconfig.worker.json"
           },
           "configurations": {
             "production": {
@@ -90,7 +92,8 @@
               }
             ],
             "styles": ["src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "webWorkerTsConfig": "tsconfig.worker.json"
           }
         }
       }

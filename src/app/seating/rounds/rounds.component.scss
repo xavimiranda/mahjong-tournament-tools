@@ -1,5 +1,7 @@
 @import "../../../styles/styles";
 .rounds {
+  position: relative;
+  padding-bottom: 100px;
   @include media-breakpoint-up(md) {
     max-height: 100vh;
     min-height: 100vh;

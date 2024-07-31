@@ -1,5 +1,6 @@
 @import "../../../styles/styles";
 .controls {
+  position: relative;
   @include media-breakpoint-up(md) {
     min-height: 100vh;
   }

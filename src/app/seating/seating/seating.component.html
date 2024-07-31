@@ -1,8 +1,11 @@
 <div class="row bg-light">
-  <div class="col-md-4">
+  <div class="col-md-4 pe-0">
     <app-controls></app-controls>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-8" style="position: relative;">
+    @if (seatingService.isGeneratingSeats()) {
+    <ngx-spinner type="fire" name="rounds"></ngx-spinner>
+    }
     <app-rounds></app-rounds>
   </div>
 </div>
