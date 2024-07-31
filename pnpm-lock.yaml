@@ -44,6 +44,9 @@ dependencies:
   rxjs:
     specifier: ~7.8.1
     version: 7.8.1
+  toastr:
+    specifier: ^2.1.4
+    version: 2.1.4
   tslib:
     specifier: ^2.6.3
     version: 2.6.3
@@ -70,6 +73,9 @@ devDependencies:
   '@types/papaparse':
     specifier: ^5.3.14
     version: 5.3.14
+  '@types/toastr':
+    specifier: ^2.1.43
+    version: 2.1.43
   jasmine-core:
     specifier: ~5.1.2
     version: 5.1.2
@@ -2954,6 +2960,12 @@ packages:
     resolution: {integrity: sha512-px7OMFO/ncXxixDe1zR13V1iycqWae0MxTaw62RpFlksUi5QuNWgQJFkTQjIOvrmutJbI7Fp2Y2N1F6D2R4G6w==}
     dev: true
 
+  /@types/jquery@3.5.30:
+    resolution: {integrity: sha512-nbWKkkyb919DOUxjmRVk8vwtDb0/k8FKncmUKFi+NY+QXqWltooxTrswvz4LspQwxvLdvzBN1TImr6cw3aQx2A==}
+    dependencies:
+      '@types/sizzle': 2.3.8
+    dev: true
+
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
     dev: true
@@ -3029,10 +3041,20 @@ packages:
       '@types/send': 0.17.4
     dev: true
 
+  /@types/sizzle@2.3.8:
+    resolution: {integrity: sha512-0vWLNK2D5MT9dg0iOo8GlKguPAU02QjmZitPEsXRuJXU/OGIOt9vT9Fc26wtYuavLxtO45v9PGleoL9Z0k1LHg==}
+    dev: true
+
   /@types/sockjs@0.3.36:
     resolution: {integrity: sha512-MK9V6NzAS1+Ud7JV9lJLFqW85VbC9dq3LmwZCuBe4wBDgKC0Kj/jd8Xl+nSviU+Qc3+m7umHHyHg//2KSa0a0Q==}
     dependencies:
       '@types/node': 22.0.0
+    dev: true
+
+  /@types/toastr@2.1.43:
+    resolution: {integrity: sha512-sLC2fr2OXeE1iyhUixpQ64wQ2tA26awmLidn4tXTLBz4yP/VhtYUKHpmiIyDtztKkHjucdiTLH8F5uRRyhNi2Q==}
+    dependencies:
+      '@types/jquery': 3.5.30
     dev: true
 
   /@types/wrap-ansi@3.0.0:
@@ -5165,6 +5187,10 @@ packages:
     hasBin: true
     dev: true
 
+  /jquery@3.7.1:
+    resolution: {integrity: sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==}
+    dev: false
+
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
     dev: true
@@ -7276,6 +7302,12 @@ packages:
     dependencies:
       is-number: 7.0.0
     dev: true
+
+  /toastr@2.1.4:
+    resolution: {integrity: sha512-LIy77F5n+sz4tefMmFOntcJ6HL0Fv3k1TDnNmFZ0bU/GcvIIfy6eG2v7zQmMiYgaalAiUv75ttFrPn5s0gyqlA==}
+    dependencies:
+      jquery: 3.7.1
+    dev: false
 
   /toidentifier@1.0.1:
     resolution: {integrity: sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==}
