@@ -1,6 +1,7 @@
 import { inject, Injectable, signal, Signal } from '@angular/core';
 import {generateRounds, RoundResults} from 'good-enough-golfer'
 import Pako from 'pako'
+import { ToastrService } from '../services/toastr.service';
 
 type NumberedSeatingMap = RoundResults
 type NamedSeatingMap = RoundResults & {
@@ -13,9 +14,14 @@ type NamedSeatingMap = RoundResults & {
 export class SeatingService {
   seatingMap = signal<RoundResults | null>(null);
   names = signal<Map<number, string>>(new Map());
+  private toastr = inject(ToastrService)
   
 
   getSeatingChart(playerCount:number , rounds: number) {
+    if(playerCount < 4) {
+      this.toastr.error("You need more than 4 players to plan out a tournament")
+      return 
+    }
     const tableCount = Math.floor(playerCount/4);
     const results = generateRounds({groups: tableCount, numberOfRounds: rounds})
 
