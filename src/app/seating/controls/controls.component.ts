@@ -15,9 +15,8 @@ export class ControlsComponent {
   playerCount = 0;
   rounds = 0;
 
-  async generateSeatings() {
+  generateSeatings() {
     this.seatingService.getSeatingChart(this.playerCount, this.rounds);
-    this.seatingService.getPackedSeating()
   }
 
   async playerFileChanged(event: Event) {
@@ -29,9 +28,4 @@ export class ControlsComponent {
       });
     this.seatingService.loadPlayerNames(playerNames)
   }
-
-decode(event: Event) {
-
-  this.seatingService.unpackSeating((event.target as HTMLInputElement).value)
-}
 }
