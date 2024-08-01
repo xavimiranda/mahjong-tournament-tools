@@ -8,6 +8,9 @@
   </div>
   <div class="p-1">
     <label for="playerNames">Load a file for the player names</label>
-    <input type="file" id="playerNames" class="form-control" (change)="playerFileChanged($event)" />
+    <div class="d-flex">
+      <input type="file" id="playerNames" class="form-control" (change)="playerFileChanged($event)" />
+      <button class="btn btn-info" [popover]="'Make sure the file has a player name per line. The names will be attributed sequentially.'"><i class="fa fa-question"></i></button>
+    </div>
   </div>
 </div>

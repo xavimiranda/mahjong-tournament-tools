@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { SeatingService } from '../seating.service';
 import { FormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 @Component({
   selector: 'app-controls',
   standalone: true,
-  imports: [FormsModule, NgxSpinnerModule],
+  imports: [FormsModule, NgxSpinnerModule,PopoverModule],
   templateUrl: './controls.component.html',
   styleUrl: './controls.component.scss',
 })
