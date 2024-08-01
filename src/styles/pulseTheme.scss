@@ -82,6 +82,7 @@ $progress-bar-bg:                   $primary !default;
 // List group
 
 $list-group-bg:                     $gray-900 !default;
+$list-group-bg: $light;
 $list-group-border-color:           transparent !default;
 $list-group-hover-bg:               lighten($list-group-bg, 10%) !default;
 $list-group-active-color:           $white !default;

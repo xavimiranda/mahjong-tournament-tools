@@ -8,3 +8,12 @@
     overflow-y: scroll;
   }
 }
+
+.repetitions {
+  position: absolute;
+  bottom: -.2rem;
+  right: .1rem;
+  font-size: .85rem;
+  color: $warning;
+
+}

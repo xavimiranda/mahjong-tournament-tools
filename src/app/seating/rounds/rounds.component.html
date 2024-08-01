@@ -1,16 +1,27 @@
 <div class="rounds">
   @if (seatingService.seatingMap()) {
-    @for (round of seatingService.seatingMap()?.rounds; track $index) {
+    @for (round of seatingService.seatingMap()?.rounds; track $index; let roundNumber = $index) {
       <h4>Round {{ $index + 1 }}</h4>
-      <div class="d-flex flex-wrap">
-        @for (table of round; track $index) {
-          <div class="border border-dark p-3 m-1">
-            <p>Table {{ $index + 1 }}</p>
-            <ul>
-              @for (player of table; track player) {
-                <li>{{ seatingService.getPlayerName(player) }}</li>
-              }
-            </ul>
+      <div class="d-flex flex-wrap gap-1">
+
+        @for (table of round; track $index; let tableNumber = $index) {
+          <div class="card border-primary mb-3" style="min-width: 15rem">
+            <div class="card-header">Table {{ tableNumber + 1 }}</div>
+            <div class="card-body">
+              <ul class="m-0 list-group">
+                @for (player of table; track player) {
+                  <li class="list-group-item">{{ seatingService.getPlayerName(player) }}</li>
+                }
+              </ul>
+            </div>
+
+            @if (seatingService.seatingMap()?.roundScores?.[roundNumber]?.[tableNumber]) {
+              <div class="card-footer">
+                <p class="p-0 m-0 text-small">
+                  Repeating pairs: {{ seatingService.seatingMap()?.roundScores?.[roundNumber]?.[tableNumber] || 0 }}
+                </p>
+              </div>
+            }
           </div>
         }
       </div>

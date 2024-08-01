@@ -7,6 +7,7 @@
 @import "./pulseTheme";
 
 $danger: darken($red, 20);
+$body-bg: $light;
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "../../node_modules/bootstrap/scss/variables";
@@ -52,5 +53,6 @@ $danger: darken($red, 20);
 // 5. Add additional custom code here
 
 @import 'pulseThemeOverrides';
+@import 'pulseCustomOverrides';
 @import 'generalStyles';
 @import 'toastrOverrides';

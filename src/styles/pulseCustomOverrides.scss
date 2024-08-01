@@ -1,0 +1,26 @@
+
+
+$list-group-bg: $light;
+.list-group {
+  &-item {
+    color: $dark; 
+
+    &.active,
+    &:hover,
+    &:focus {
+      color: $primary;
+    }
+
+    &.active {
+      font-weight: 700;
+
+      &:hover {
+        background-color: $list-group-hover-bg;
+      }
+    }
+
+    &.disabled:hover {
+      color: $list-group-disabled-color;
+    }
+  }
+}
