@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import Pako from 'pako';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EncodingService {
-
   encodeObject(object: Object) {
     const gzip = Pako.gzip(JSON.stringify(object));
 

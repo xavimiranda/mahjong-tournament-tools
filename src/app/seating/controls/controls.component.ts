@@ -21,11 +21,11 @@ export class ControlsComponent {
 
   async playerFileChanged(event: Event) {
     let file = (event.target as HTMLInputElement).files?.item(0);
-    let playerNames: string[] = []
+    let playerNames: string[] = [];
     if (file && file.type === 'text/plain' && file.name.endsWith('.txt'))
       await file.text().then((text) => {
-        playerNames = text.split('\n')
+        playerNames = text.split('\n');
       });
-    this.seatingService.loadPlayerNames(playerNames)
+    this.seatingService.loadPlayerNames(playerNames);
   }
 }

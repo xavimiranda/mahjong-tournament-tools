@@ -21,7 +21,7 @@ export const generationInProgressGuard: CanDeactivateFn<SeatingComponent> = (
     if (isUserQuitting) {
       seatingService.worker.terminate();
       seatingService.isGeneratingSeats.set(false);
-      spinner.hide(seatingService.seatGenSpinner)
+      spinner.hide(seatingService.seatGenSpinner);
       return isUserQuitting;
     }
   }

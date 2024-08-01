@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { ControlsComponent } from "../controls/controls.component";
-import { RoundsComponent } from "../rounds/rounds.component";
+import { ControlsComponent } from '../controls/controls.component';
+import { RoundsComponent } from '../rounds/rounds.component';
 import { SeatingService } from '../seating.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -9,8 +9,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   standalone: true,
   imports: [ControlsComponent, RoundsComponent, NgxSpinnerModule],
   templateUrl: './seating.component.html',
-  styleUrl: './seating.component.scss'
+  styleUrl: './seating.component.scss',
 })
 export class SeatingComponent {
-  seatingService = inject(SeatingService)
+  seatingService = inject(SeatingService);
 }

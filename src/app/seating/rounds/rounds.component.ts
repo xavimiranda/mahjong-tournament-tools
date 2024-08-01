@@ -7,8 +7,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   standalone: true,
   imports: [NgxSpinnerModule],
   templateUrl: './rounds.component.html',
-  styleUrl: './rounds.component.scss'
+  styleUrl: './rounds.component.scss',
 })
 export class RoundsComponent {
-  seatingService = inject(SeatingService)
+  seatingService = inject(SeatingService);
 }

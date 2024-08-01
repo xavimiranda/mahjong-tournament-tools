@@ -4,7 +4,7 @@ import { generationInProgressGuard } from './seating/generation-in-progress.guar
 import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
-    {path: '', component: HomeComponent},
-    {path: 'hanchan', component: SeatingComponent, canDeactivate: [generationInProgressGuard]},
-    {path: '**', component: HomeComponent, pathMatch: 'full'},
+  { path: '', component: HomeComponent },
+  { path: 'hanchan', component: SeatingComponent, canDeactivate: [generationInProgressGuard] },
+  { path: '**', component: HomeComponent, pathMatch: 'full' },
 ];

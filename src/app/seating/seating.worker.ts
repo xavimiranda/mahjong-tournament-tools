@@ -1,8 +1,8 @@
 /// <reference lib="webworker" />
 
-import { generateRounds } from "good-enough-golfer";
+import { generateRounds } from 'good-enough-golfer';
 
 addEventListener('message', ({ data }) => {
-  const results = generateRounds(data)
-  postMessage(results)
+  const results = generateRounds(data);
+  postMessage(results);
 });

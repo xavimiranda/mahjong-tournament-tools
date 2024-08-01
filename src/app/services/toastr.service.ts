@@ -2,24 +2,24 @@ import { Injectable } from '@angular/core';
 import toastr from 'toastr';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ToastrService {
   public success(message: string) {
-    toastr.success(message)
+    toastr.success(message);
   }
 
-  public warn(message: string){
-    toastr.warning(message)
+  public warn(message: string) {
+    toastr.warning(message);
   }
 
-  public error(message: string){
-    toastr.error(message, '', this.getOptions())
+  public error(message: string) {
+    toastr.error(message, '', this.getOptions());
   }
 
   private getOptions(): ToastrOptions {
     return {
-      timeOut: 10000
-    }
+      timeOut: 10000,
+    };
   }
 }
