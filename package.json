@@ -1,6 +1,6 @@
 {
-  "name": "mahjong-tournament-seating",
-  "version": "0.0.0",
+  "name": "mahjong-tournament-tools",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
