@@ -5,6 +5,7 @@ import Pako from 'pako';
   providedIn: 'root',
 })
 export class EncodingService {
+  /** Turns the passed object into an encoded string */
   encodeObject(object: Object) {
     const gzip = Pako.gzip(JSON.stringify(object));
 
@@ -12,6 +13,7 @@ export class EncodingService {
     return encodedData;
   }
 
+  /** Decodes the passed string into an object */
   decodeObject(data: string) {
     const arr = Uint8Array.from(atob(data), (c) => c.charCodeAt(0));
     const json = Pako.ungzip(arr, { to: 'string' });

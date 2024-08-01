@@ -12,12 +12,12 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
   styleUrl: './controls.component.scss',
 })
 export class ControlsComponent {
-  private seatingService = inject(SeatingService);
+  seatingService = inject(SeatingService);
   playerCount = 0;
   rounds = 0;
 
   generateSeatings() {
-    this.seatingService.getSeatingChart(this.playerCount, this.rounds);
+    this.seatingService.generateSeatings(this.playerCount, this.rounds);
   }
 
   async playerFileChanged(event: Event) {
@@ -28,5 +28,9 @@ export class ControlsComponent {
         playerNames = text.split('\n');
       });
     this.seatingService.loadPlayerNames(playerNames);
+  }
+
+  copyArrangement() {
+    this.seatingService.extractSeatings()
   }
 }

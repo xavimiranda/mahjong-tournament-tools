@@ -10,7 +10,26 @@
     <label for="playerNames">Load a file for the player names</label>
     <div class="d-flex">
       <input type="file" id="playerNames" class="form-control" (change)="playerFileChanged($event)" />
-      <button class="btn btn-info" [popover]="'Make sure the file has a player name per line. The names will be attributed sequentially.'"><i class="fa fa-question"></i></button>
+      <button
+        class="btn btn-info"
+        [popover]="'Make sure the file has a player name per line. The names will be attributed sequentially.'"
+      >
+        <i class="fa fa-question"></i>
+      </button>
     </div>
   </div>
+
+  @if (this.seatingService.seatingMap()) {
+    <div class="d-flex">
+      <button type="button" class="btn btn-secondary w-100" (click)="copyArrangement()">
+        <i class="fa fa-copy me-1"></i>Copy seating arrangement
+      </button>
+      <button
+        class="btn btn-info"
+        [popover]="'This will generate a string that you can paste into the Tournament tab.'"
+      >
+        <i class="fa fa-question"></i>
+      </button>
+    </div>
+  }
 </div>
