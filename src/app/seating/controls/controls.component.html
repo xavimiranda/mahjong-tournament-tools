@@ -1,16 +1,38 @@
 <div class="controls text-light bg-primary p-1">
-    <div class="p-1">
-        <label for="playerCount">Number of players</label>
-        <input type="number" id="playerCount" spinner class="form-control" [(ngModel)]="playerCount">
-        <label for="rounds">Number of Rounds (Hanchan)</label>
-        <input type="number" id="rounds" spinner class="form-control" [(ngModel)]="rounds">
-        <button type="button" class="btn btn-secondary my-1 w-100" (click)="generateSeatings()">Generate Seating</button>
-    </div>
-    <div class="p-1">
-
-        <label for="playerNames">Load a file for the player names</label>
-        <input type='file' id="playerNames" class="form-control" (change)="playerFileChanged($event)">
-    </div>
-    <input type="text" class="text" (change)="decode($event)">
-    <ngx-spinner type="fire" name="rounds"></ngx-spinner>
+  <div class="p-1">
+    <label for="playerCount">Number of players</label>
+    <input
+      type="number"
+      id="playerCount"
+      spinner
+      class="form-control"
+      [(ngModel)]="playerCount"
+    />
+    <label for="rounds">Number of Rounds (Hanchan)</label>
+    <input
+      type="number"
+      id="rounds"
+      spinner
+      class="form-control"
+      [(ngModel)]="rounds"
+    />
+    <button
+      type="button"
+      class="btn btn-secondary my-1 w-100"
+      (click)="generateSeatings()"
+    >
+      Generate Seating
+    </button>
+  </div>
+  <div class="p-1">
+    <label for="playerNames">Load a file for the player names</label>
+    <input
+      type="file"
+      id="playerNames"
+      class="form-control"
+      (change)="playerFileChanged($event)"
+    />
+  </div>
+  <input type="text" class="text" (change)="decode($event)" />
+  <ngx-spinner type="fire" name="rounds"></ngx-spinner>
 </div>
