@@ -13,6 +13,7 @@ type NamedSeatingMap = RoundResults & {
 })
 export class SeatingService implements OnDestroy {
   seatingMap = signal<RoundResults | null>(null);
+  seatGenSpinner = 'seatGenSpinner' as const;
   isGeneratingSeats = signal<boolean>(false);
   names = signal<Map<number, string>>(new Map());
   private toastr = inject(ToastrService);
@@ -30,15 +31,16 @@ export class SeatingService implements OnDestroy {
 
   getSeatingChart(playerCount: number, rounds: number) {
     if (playerCount < 4) {
-      this.toastr.error(
-        'You need more than 4 players to plan out a tournament'
-      );
+      this.toastr.error('You need more than 4 players to plan out a tournament');
       return;
     }
+    if (playerCount > 200 || rounds > 6)
+      this.toastr.warn('Generating seats for big tournaments can take some time. Please be patient!');
+
     this.seatingMap.set(null);
     const tableCount = Math.floor(playerCount / 4);
 
-    this.spinner.show('rounds', { fullScreen: false });
+    this.spinner.show(this.seatGenSpinner, { fullScreen: false });
     this.isGeneratingSeats.set(true);
 
     this.worker.postMessage({
@@ -48,7 +50,7 @@ export class SeatingService implements OnDestroy {
     // const results = generateRounds();
     this.worker.onmessage = ({ data }) => {
       this.seatingMap.set(data);
-      this.spinner.hide('rounds');
+      this.spinner.hide(this.seatGenSpinner);
       this.isGeneratingSeats.set(false);
     };
   }
@@ -58,8 +60,6 @@ export class SeatingService implements OnDestroy {
   }
 
   getPlayerName(pNumber: number) {
-    return this.names().has(pNumber)
-      ? this.names().get(pNumber)
-      : `Player ${pNumber + 1}`;
+    return this.names().has(pNumber) ? this.names().get(pNumber) : `Player ${pNumber + 1}`;
   }
 }
