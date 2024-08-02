@@ -1,0 +1,23 @@
+$animation_duration:  0.25s;
+.badge {
+  transition: all $animation_duration ease-in-out;
+  position: relative;
+  i {
+    margin-left: .15rem;
+    position: absolute;
+    visibility: hidden;
+    transition:
+      opacity $animation_duration ease-in-out,
+      visibility $animation_duration ease-in-out;
+    opacity: 0;
+  }
+  &:hover {
+    padding-right: 1.25rem;
+    cursor: pointer;
+    background-color: var(--bs-danger) !important;
+    i {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}

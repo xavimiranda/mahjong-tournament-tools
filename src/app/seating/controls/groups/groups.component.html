@@ -1,0 +1,25 @@
+<div>
+  <button type="button" class="btn btn-secondary" (click)="addGroup()"><i class="fa fa-plus me-1"></i>Add Group</button>
+  <div>
+    @let chosenGroup = seatingService.chooseGroup(group())();
+    @for (g of chosenGroup; track $index; let i = $index) {
+      <div class="group bg-secondary text-dark p-2 my-1">
+        <p>{{group() | titlecase}} Group {{ i + 1 }}</p>
+        <input
+          type="text"
+          [(ngModel)]="currentSelection[i]"
+          [typeahead]="seatingService.getPlayerNames()"
+          (typeaheadOnSelect)="onSelect($event, i)"
+          (typeaheadOnPreview)="onPreview($event)"
+          (typeaheadOnBlur)="onBlur($event, i)"
+          class="form-control"
+          placeholder="Search Player..."
+        />
+        @for (name of chosenGroup[i]; track $index; let j = $index) {
+          @let showTrash = false;
+          <span class="badge rounded-pill bg-primary me-1" (click)="removeNameFromGroup(i, name)">{{ name }} <i class="fa fa-trash"></i> </span>
+        }
+      </div>
+    }
+  </div>
+</div>
