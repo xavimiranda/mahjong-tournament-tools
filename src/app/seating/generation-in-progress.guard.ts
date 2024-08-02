@@ -23,5 +23,5 @@ export const generationInProgressGuard: CanDeactivateFn<SeatingComponent> = (
       return isUserQuitting;
     }
   }
-  return false;
+  return true;
 };
