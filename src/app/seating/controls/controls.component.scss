@@ -2,6 +2,9 @@
 .controls {
   position: relative;
   @include media-breakpoint-up(md) {
-    min-height: 100vh;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-bottom: 10rem;
   }
 }
