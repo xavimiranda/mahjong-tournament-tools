@@ -3,8 +3,9 @@ import { RoundResults } from 'good-enough-golfer';
 import { ToastrService } from '../services/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { EncodingService } from '../services/encoding.service';
+import { Player } from '../models/player';
 
-type GroupType = 'avoid' | 'forbid'
+type GroupType = 'avoid' | 'forbid';
 
 /** Service responsible to generate seating arrangements, and to deliver this information to components */
 @Injectable({
@@ -18,11 +19,14 @@ export class SeatingService implements OnDestroy {
   /** Flag that indicates if the generation worker is running (ie: if the seats are being generating) */
   isGeneratingSeats = signal<boolean>(false);
   /** Map of the loaded names of the players */
-  names = signal<Map<number, string>>(new Map());
+  // names = signal<Map<number, string>>(new Map());
+  /** Map of the players */
+  players = signal<Player[]>([]);
+
   /** Groups of players that should never be matched against each other */
-  forbidGroups = signal<string[][]>(new Array(['forbid']));
+  forbidGroups = signal<Player[][]>([]);
   /** Groups of players that should be avoided mathching against each other */
-  avoidGroups = signal<string[][]>(new Array(['avoid']));
+  avoidGroups = signal<Player[][]>([]);
 
   private toastr = inject(ToastrService);
   private spinner = inject(NgxSpinnerService);
@@ -64,6 +68,8 @@ export class SeatingService implements OnDestroy {
     this.worker.postMessage({
       groups: tableCount,
       numberOfRounds: rounds,
+      forbidGroups: this.forbidGroups().map((group) => group.map((p) => p.id)),
+      avoidGroups: this.avoidGroups().map((group) => group.map((p) => p.id)),
     });
     // const results = generateRounds();
     this.worker.onmessage = ({ data }) => {
@@ -86,12 +92,15 @@ export class SeatingService implements OnDestroy {
    * @param pNames array of names
    */
   loadPlayerNames(pNames: string[]) {
-    pNames.forEach((name, i) => this.names().set(i, name));
+    this.players.update((curPlayers) => {
+      pNames.forEach((name, i) => curPlayers.push({ id: i, name: name }));
+      return curPlayers;
+    });
   }
 
   /** Returns all loaded player names as an array */
-  getPlayerNames() {
-    return [...this.names().values()];
+  getPlayerNames(): string[] {
+    return [...this.players().map((p) => p.name)];
   }
 
   /**
@@ -100,7 +109,8 @@ export class SeatingService implements OnDestroy {
    * @returns the player name
    */
   getPlayerName(pNumber: number) {
-    return this.names().has(pNumber) ? this.names().get(pNumber) : `Player ${pNumber + 1}`;
+    const player = this.players().find((p) => p.id === pNumber);
+    return player ? player.name : `Player ${pNumber + 1}`;
   }
 
   /** Encodes the seating information and places it in the clipboard */
@@ -108,19 +118,17 @@ export class SeatingService implements OnDestroy {
     const obj = {
       rounds: this.seatingMap()?.rounds,
       roundScores: this.seatingMap()?.roundScores,
-      players: Array.from(this.names().entries()).map((v) => {
-        return { id: v[0], name: v[1] };
-      }),
+      players: this.players(),
     };
     const encoded = this.encodingService.encodeObject(obj);
     navigator.clipboard.writeText(encoded);
     this.toastr.success('Coppied to the clipboard.');
   }
 
-  //#region Groups 
+  //#region Groups
   addGroup(group: GroupType) {
     const cg = this.chooseGroup(group);
-    console.log(cg())
+    console.log(cg());
     cg.update((cV) => [...cV, []]);
     return this.chooseGroup(group).length - 1;
   }
@@ -135,19 +143,29 @@ export class SeatingService implements OnDestroy {
   }
 
   removePlayerFromGroup(group: GroupType, groupNumber: number, name: string) {
+    const player = this.players().find((p) => p.name === name)!;
     this.chooseGroup(group).update((groups) => {
-      groups[groupNumber] = groups[groupNumber].filter((n) => n !== name);
+      groups[groupNumber] = groups[groupNumber].filter((p) => p.name !== name);
       return groups;
     });
   }
 
   addPlayerToGroup(group: GroupType, name: string, groupNumber: number) {
-    if (!this.chooseGroup(group)()[groupNumber].includes(name))
-      this.chooseGroup('avoid').update((groups) => {
-        groups[groupNumber].push(name);
+    const player = this.players().find((p) => p.name === name)!;
+    if (!this.chooseGroup(group)()[groupNumber].includes(player))
+      this.chooseGroup(group).update((groups) => {
+        groups[groupNumber].push(player);
         return groups;
       });
   }
-  //#endregion
 
+  /** Removes a group, either forbid or avoid */
+  removeGroup(group: GroupType, groupNumber: number) {
+    const g = this.chooseGroup(group);
+    g.update(current => {
+      current.splice(groupNumber, 1)
+      return current;
+    })
+  }
+  //#endregion
 }

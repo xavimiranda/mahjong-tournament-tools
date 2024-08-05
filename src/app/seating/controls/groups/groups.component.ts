@@ -41,4 +41,8 @@ export class GroupsComponent {
   clearSelection(groupNumber: number) {
     this.currentSelection[groupNumber] = '';
   }
+
+  removeGroup(groupNumber: number) {
+    this.seatingService.removeGroup(this.group(), groupNumber);
+  }
 }

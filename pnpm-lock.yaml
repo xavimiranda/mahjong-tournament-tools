@@ -35,6 +35,9 @@ dependencies:
   font-awesome:
     specifier: ^4.7.0
     version: 4.7.0
+  good-enough-golfer:
+    specifier: ^0.1.1
+    version: 0.1.1
   ngx-bootstrap:
     specifier: ^18.0.2
     version: 18.0.2(@angular/animations@18.1.2)(@angular/common@18.1.2)(@angular/core@18.1.2)(@angular/forms@18.1.2)(rxjs@7.8.1)
@@ -4680,6 +4683,10 @@ packages:
       slash: 5.1.0
       unicorn-magic: 0.1.0
     dev: true
+
+  /good-enough-golfer@0.1.1:
+    resolution: {integrity: sha512-wgMEe3CNKdt4Ak1L9H0WON0dOgwPmVmI7tn1uOQwYrwWgR11Y9/VQ/RQHI30OSvQu/rNO6XgkKZaGMKTzVvefg==}
+    dev: false
 
   /gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}

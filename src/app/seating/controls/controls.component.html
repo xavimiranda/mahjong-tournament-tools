@@ -37,7 +37,7 @@
       <p>The player count has changed. Keep the same name file?</p>
       <div class="d-flex">
         <button class="btn btn-success w-50" (click)="playerCountChanged.set(false)">Keep</button>
-        <button class="btn btn-danger w-50" (click)="playerNameFile = ''; seatingService.names().clear()">
+        <button class="btn btn-danger w-50" (click)="playerNameFile = ''; seatingService.players.set([])">
           Change
         </button>
       </div>
@@ -45,7 +45,6 @@
       <p>{{ playerNameFile }} file loaded</p>
     }
   </div>
-  <!-- TODO: remove the extra conditional -->
   @if (playerNameFile) {
     <div class="p-1">
       <h6>2.1 - Avoid groups</h6>
