@@ -3,7 +3,7 @@ import { RoundResults } from 'good-enough-golfer';
 import { ToastrService } from '../services/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { EncodingService } from '../services/encoding.service';
-import { Player } from '../models/player';
+import { Player, PlayerCSV } from '../models/player';
 
 type GroupType = 'avoid' | 'forbid';
 
@@ -98,6 +98,40 @@ export class SeatingService implements OnDestroy {
     });
   }
 
+  loadPlayers(data: PlayerCSV[]) {
+    const avoidGroups: Player[][] = [];
+    const forbidGroups: Player[][] = [];
+    const players = data.map((csv, i) => {
+      const p: Player = {
+        id: i,
+        name: csv.name,
+        country: csv.country,
+        associationID: csv.associationID,
+        team: csv.team,
+      };
+      csv.avoidGroups
+        ?.split(' ')
+        .sort()
+        .forEach((g) => {
+          const groupNumber = parseInt(g) - 1;
+          if (!avoidGroups[groupNumber]) avoidGroups[groupNumber] = [];
+          avoidGroups[groupNumber].push(p);
+        });
+      csv.forbidGroups
+        ?.split(' ')
+        .sort()
+        .forEach((g) => {
+          const groupNumber = parseInt(g) - 1;
+          if (!forbidGroups[groupNumber]) forbidGroups[groupNumber] = [];
+          forbidGroups[groupNumber].push(p);
+        });
+      return p;
+    });
+    this.avoidGroups.set(avoidGroups);
+    this.forbidGroups.set(forbidGroups);
+    this.players.set(players);
+  }
+
   /** Returns all loaded player names as an array */
   getPlayerNames(): string[] {
     return [...this.players().map((p) => p.name)];
@@ -162,10 +196,10 @@ export class SeatingService implements OnDestroy {
   /** Removes a group, either forbid or avoid */
   removeGroup(group: GroupType, groupNumber: number) {
     const g = this.chooseGroup(group);
-    g.update(current => {
-      current.splice(groupNumber, 1)
+    g.update((current) => {
+      current.splice(groupNumber, 1);
       return current;
-    })
+    });
   }
   //#endregion
 }

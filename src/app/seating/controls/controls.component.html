@@ -1,24 +1,8 @@
 <div class="controls text-light bg-primary px-1 pt-1">
   <div class="p-1">
-    <h5>1 - Basic setup</h5>
-    <label for="playerCount">Number of players</label>
-    <input
-      type="number"
-      id="playerCount"
-      spinner
-      class="form-control"
-      [(ngModel)]="playerCount"
-      (change)="onPlayerCountChanged()"
-    />
-    <label for="rounds">Number of Rounds (Hanchan)</label>
-    <input type="number" id="rounds" spinner class="form-control" [(ngModel)]="rounds" />
-    <button type="button" class="btn btn-secondary my-1 w-100" (click)="generateSeatings()">Generate Seating</button>
-  </div>
-  <hr />
-  <div class="p-1">
-    <h5>2 - Players</h5>
-    @if (!playerNameFile) {
-      <label for="playerNames">Load a file for the player names</label>
+    <h5>1 - Players</h5>
+    @if (!playersFile) {
+      <label for="playerNames">Load a file with the players information</label>
       <div class="d-flex">
         <input type="file" id="playerNames" class="form-control" (change)="playerFileChanged($event)" />
         <button class="btn btn-info" [popover]="playerNamesPopover">
@@ -26,33 +10,76 @@
             <div class="">
               <p>The file should be a csv, with one player info per line</p>
               <p>The info is:</p>
-              <pre>Player Name, Country, Association ID, Avoid Groups, Forbid Groups</pre>
+              <pre>Name, Country, Team, Association ID, Avoid Groups, Forbid Groups</pre>
               <p>You can read more about the file <a href="/hanchan">here</a></p>
             </div>
           </ng-template>
           <i class="fa fa-question"></i>
         </button>
       </div>
-    } @else if (playerCountChanged()) {
+    }
+    <!-- @else if (playerCountChanged()) {
       <p>The player count has changed. Keep the same name file?</p>
       <div class="d-flex">
         <button class="btn btn-success w-50" (click)="playerCountChanged.set(false)">Keep</button>
-        <button class="btn btn-danger w-50" (click)="playerNameFile = ''; seatingService.players.set([])">
+        <button class="btn btn-danger w-50" (click)="playersFile = ''; seatingService.players.set([])">
           Change
         </button>
       </div>
-    } @else {
-      <p>{{ playerNameFile }} file loaded</p>
+    }  -->
+    @else {
+      <p>{{ playersFile }} file loaded</p>
     }
   </div>
-  @if (playerNameFile) {
+  @if (playersFile && seatingService.players()) {
     <div class="p-1">
-      <h6>2.1 - Avoid groups</h6>
-      <app-groups [group]="'avoid'"></app-groups>
+      <h5>2 - Seating setup</h5>
+      <label for="playerCount">Number of players</label>
+      <input
+        type="number"
+        id="playerCount"
+        spinner
+        class="form-control"
+        [(ngModel)]="playerCount"
+        (change)="onPlayerCountChanged()"
+      />
+      <label for="rounds">Number of Rounds (Hanchan)</label>
+      <input type="number" id="rounds" spinner class="form-control" [(ngModel)]="rounds" />
+      <button
+        type="button"
+        class="btn btn-secondary my-1 w-100"
+        [disabled]="playerCount <= 0 || rounds <= 0"
+        (click)="generateSeatings()"
+      >
+        Generate Seating
+      </button>
+    </div>
+    <hr />
+    <div class="p-1">
+      <div (click)="avoidCollapsed = !avoidCollapsed" class="position-relative hoverable">
+        <h6>2.1 - Avoid groups <span class="small text-dark">({{seatingService.avoidGroups().length}})</span></h6>
+        <i
+          class="pull-right fa position-absolute top-0 end-0"
+          [class.fa-chevron-up]="!avoidCollapsed"
+          [class.fa-chevron-down]="avoidCollapsed"
+        ></i>
+      </div>
+      <div [collapse]="avoidCollapsed" [isAnimated]="true">
+        <app-groups [group]="'avoid'"></app-groups>
+      </div>
     </div>
     <div class="p-1">
-      <h6>2.2 - Forbid groups</h6>
-      <app-groups [group]="'forbid'"></app-groups>
+      <div (click)="forbidCollapsed = !forbidCollapsed" class="position-relative hoverable">
+        <h6>2.2 - Forbid groups <span class="small text-dark">({{seatingService.forbidGroups().length}})</span></h6>
+        <i
+          class="pull-right fa position-absolute top-0 end-0"
+          [class.fa-chevron-up]="!forbidCollapsed"
+          [class.fa-chevron-down]="forbidCollapsed"
+        ></i>
+      </div>
+      <div [collapse]="forbidCollapsed" [isAnimated]="true">
+        <app-groups [group]="'forbid'"></app-groups>
+      </div>
     </div>
   }
   @if (this.seatingService.seatingMap()) {

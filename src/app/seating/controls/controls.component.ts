@@ -1,17 +1,19 @@
 import { Component, inject, signal } from '@angular/core';
 import { SeatingService } from '../seating.service';
-import { FormsModule, NgControl } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { ToastrService } from '../../services/toastr.service';
-import { TypeaheadMatch, TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { GroupsComponent } from './groups/groups.component';
+import Papa from 'papaparse';
+import { Player, PlayerCSV } from '../../models/player';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 @Component({
   selector: 'app-controls',
   standalone: true,
-  imports: [FormsModule, NgxSpinnerModule, PopoverModule, TypeaheadModule, GroupsComponent],
+  imports: [FormsModule, NgxSpinnerModule, PopoverModule, TypeaheadModule, GroupsComponent, CollapseModule],
   templateUrl: './controls.component.html',
   styleUrl: './controls.component.scss',
 })
@@ -19,8 +21,10 @@ export class ControlsComponent {
   seatingService = inject(SeatingService);
   playerCount = 0;
   rounds = 0;
-  playerNameFile = '';
+  playersFile = '';
   playerCountChanged = signal<boolean>(false);
+  avoidCollapsed = true
+  forbidCollapsed = true
 
   private toastr = inject(ToastrService);
 
@@ -35,31 +39,50 @@ export class ControlsComponent {
     const elem = event.target as HTMLInputElement;
     let file = elem.files?.item(0);
 
-    if (!file || file.type !== 'text/plain' || !file.name.endsWith('.txt')) {
+    if (!file || (file.type != 'text/plain' && file.type != 'text/csv')) {
       this.toastr.error(
-        "Something went wrong reading your file! Make sure it' a .txt file, with a player name per line",
+        "Something went wrong reading your file! Make sure it's a valid file with a player per line",
       );
-      this.playerNameFile = '';
+      this.playersFile = '';
       this.playerCountChanged.set(false);
       return;
     }
-    this.playerNameFile = file.name;
+    this.playersFile = file.name;
 
-    let playerNames: string[] = [];
+    let players: string[] = [];
 
     await file.text().then((text) => {
-      playerNames = text.split('\n');
+      players = text.split('\n');
     });
 
-    if (this.playerCount > playerNames.length)
+    this.playerCount = players.length;
+
+    const leftOutPlayers = this.playerCount % 4;
+    if (leftOutPlayers > 0)
+      this.toastr.warn(`The player count is not a multiple of 4. The last ${leftOutPlayers} will be left out!`);
+
+    if (this.playerCount > players.length)
       this.toastr.warn(
         `The list of players names is shorter than the player count. Some players will go unnamed if you continue`,
       );
-    this.seatingService.loadPlayerNames(playerNames);
+    
+    Papa.parse<PlayerCSV>(file, {
+      header: true,
+      transformHeader: this.cleanHeader,
+      complete: (results, file) => {
+      console.log('complete parsing');
+        this.seatingService.loadPlayers(results.data)
+      },
+    });
   }
-
+  private cleanHeader(header: string) {
+    return header
+      .replace(/\s(\w)/g, (subs, g1) => `${g1.toUpperCase()}`)
+      .replace(/^\w/, (s) => s.toLowerCase())
+      .replace('"', '');
+  }
   onPlayerCountChanged() {
-    if (this.playerNameFile) this.playerCountChanged.set(true);
+    if (this.playersFile) this.playerCountChanged.set(true);
   }
 
   copyArrangement() {
