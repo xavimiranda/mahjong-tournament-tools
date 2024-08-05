@@ -14,10 +14,10 @@ export class EncodingService {
   }
 
   /** Decodes the passed string into an object */
-  decodeObject(data: string) {
+  decodeObject<T>(data: string) {
     const arr = Uint8Array.from(atob(data), (c) => c.charCodeAt(0));
     const json = Pako.ungzip(arr, { to: 'string' });
     const parsed = JSON.parse(json);
-    return parsed;
+    return parsed as T;
   }
 }

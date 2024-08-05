@@ -1,0 +1,11 @@
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+.print-preview {
+  padding-bottom: 100px;
+  @include media-breakpoint-up(md) {
+    max-height: 100vh;
+    min-height: 100vh;
+    overflow: scroll;
+  }
+}

@@ -1,1 +1,26 @@
-<p>tournament-home works!</p>
+@if (tournamentService.tournament()) {
+  <div class="row bg-light position-relative">
+    <div class="col-md-4 pe-0">
+      <app-tournament-controls></app-tournament-controls>
+    </div>
+    <div class="col-md-8">
+      <nav class="p-2 bg-secondary border-bottom border-primary">
+        <button>click me</button>
+      </nav>
+      <div class="print-preview">
+        @for (round of tournamentService.tournament()?.rounds; track $index) {
+          <p>Round {{$index}}</p>
+          <p>{{round.startingTime}}</p>
+          @for (table of round.tables; track $index) {
+            <app-table></app-table>
+          }
+        }
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="container">
+    <textarea class="form-control" rows="10" [(ngModel)]="loadString"></textarea>
+    <button class="btn-primary btn" (click)="loadSeating()">Load Seating</button>
+  </div>
+}

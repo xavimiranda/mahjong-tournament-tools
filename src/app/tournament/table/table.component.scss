@@ -1,0 +1,66 @@
+$thick-border: 2px solid black;
+$normal-border: 1px solid black;
+
+@mixin thick-b($side) {
+    border-#{$side}: $thick-border;
+}
+.thick-b-top {
+    @include thick-b(top);
+}
+.thick-b-left {
+    @include thick-b(left);
+}
+.thick-b-right {
+    @include thick-b(right);
+}
+.thick-b-bottom {
+    @include thick-b(bottom);
+}
+
+.thick-b-x {
+    @include thick-b(left);
+    @include thick-b(right);
+}
+
+td, th {
+    border: $normal-border;
+    padding: .25rem;
+    height: 2.13rem;
+}
+
+th {
+    text-align: center;
+    &:first-child {
+        content: '';
+        border-top: none !important;
+        border-left: none;
+    }
+}
+
+td {
+    width: 20rem;
+    &:first-child{ 
+        text-align: right;
+        font-weight: bold;
+    }
+}
+
+.outer-box {
+    border: 1px solid rgba($color: tomato, $alpha: .5);
+    display: flex;
+}
+
+.right-tables {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.round-table {
+    margin: 0 .2rem;
+    border: $thick-border;
+}
+
+.aligner {
+    margin-bottom: 2.1rem;
+}

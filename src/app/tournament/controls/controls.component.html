@@ -1,0 +1,81 @@
+<div class="controls text-light bg-primary px-1 pt-1">
+  @let tournament = tournamentService.tournament;
+  @let settings = tournamentService.tournament()?.settings;
+  @if (tournament && settings) {
+    <div class="p-1">
+      <div (click)="pointsCollapsed = !pointsCollapsed" class="position-relative hoverable">
+        <h5>Points and Scoring</h5>
+        <i
+          class="pull-right fa position-absolute top-0 end-0"
+          [class.fa-chevron-up]="!pointsCollapsed"
+          [class.fa-chevron-down]="pointsCollapsed"
+        ></i>
+      </div>
+      <div [collapse]="pointsCollapsed" [isAnimated]="true">
+        <label for="startingScore">Starting Game Score</label>
+        <input type="number" id="startingScore" spinner class="form-control" [(ngModel)]="settings.startingGameScore" />
+        <label for="firstPlaceUma">First place Uma</label>
+        <input type="number" id="firstPlaceUma" spinner class="form-control" [(ngModel)]="settings.firstPlaceUma" />
+
+        <label for="secondPlaceUma">Second place Uma</label>
+        <input type="number" id="secondPlaceUma" spinner class="form-control" [(ngModel)]="settings.secondPlaceUma" />
+        <label for="thirdPlaceUma">Third place Uma</label>
+        <input type="number" id="thirdPlaceUma" spinner class="form-control" [(ngModel)]="settings.thirdPlaceUma" />
+        <label for="fourthPlaceUma">Fourth place Uma</label>
+        <input type="number" id="fourthPlaceUma" spinner class="form-control" [(ngModel)]="settings.fourthPlaceUma" />
+      </div>
+    </div>
+    <div class="p-1">
+      <div (click)="roundsCollapsed = !roundsCollapsed" class="position-relative hoverable">
+        <h5>Rounds</h5>
+        <i
+          class="pull-right fa position-absolute top-0 end-0"
+          [class.fa-chevron-up]="!roundsCollapsed"
+          [class.fa-chevron-down]="roundsCollapsed"
+        ></i>
+      </div>
+      <div [collapse]="roundsCollapsed" [isAnimated]="true">
+        <label for="roundDuration"
+          >Round duration: <span class="small">{{ duration }}</span></label
+        >
+        <div class="d-flex gap-1">
+          <div class="form-group">
+            <label for="roundDuration">Hours</label>
+            <input
+              type="number"
+              id="roundDuration"
+              class="form-control"
+              [(ngModel)]="hours"
+              (change)="setRoundDuration()"
+            />
+          </div>
+          <div class="form-group">
+            <label for="roundDuration">Minutes</label>
+            <input
+              type="number"
+              id="roundDuration"
+              spinner
+              class="form-control"
+              [(ngModel)]="minutes"
+              (change)="setRoundDuration()"
+            />
+          </div>
+        </div>
+
+        @for (round of tournament()?.rounds; track $index; let roundNum = $index) {
+          <div class="form-group">
+            <label for="roundDuration">Round {{ roundNum + 1 }} starts at:</label>
+            <input
+              type="text"
+              placeholder="Datepicker"
+              class="form-control"
+              bsDatepicker
+              [bsConfig]="getDatePickConfig()"
+              [(ngModel)]="round.startingTime"
+            />
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>
