@@ -1,0 +1,12 @@
+@media print {
+    table {
+        break-inside: avoid;
+        break-after: auto;
+    }
+
+    h2 {
+        break-before: always;
+        break-after: avoid;
+    }
+}
+

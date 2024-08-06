@@ -1,82 +1,79 @@
-<div class="outer-box">
+@let settings = tournamentService.tournament()?.settings;
+<div class="outer-box mb-4">
   <table class="score-table">
-    <thead>
-      <tr>
-        <th></th>
-        <th class="thick-b-top thick-b-left">East</th>
-        <th class="thick-b-top">South</th>
-        <th class="thick-b-top">West</th>
-        <th class="thick-b-top thick-b-right">North</th>
-      </tr>
-    </thead>
+    <thead></thead>
     <tbody>
       <!-- Row 1 -->
-      <tr class="thick-b-top thick-b-x">
+      <tr class="thick-b-top ">
         <td>Name</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        @for (playerSeat of table().players; track playerSeat.player.id) {
+            <td>{{playerSeat.player.name}}</td>
+        }
       </tr>
       <!-- Row 2 -->
-      <tr class="thick-b-x">
+      <tr class="">
         <td>Id</td>
+        @for (playerSeat of table().players; track playerSeat.player.id) {
+            <td>{{playerSeat.player.associationID}}</td>
+        }
+      </tr>
+      <tr class="">
+        <td>Seat</td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
       </tr>
       <!-- Repeat rows as needed -->
-      <tr class="thick-b-top thick-b-x">
+      <tr class="thick-b-top ">
         <td>Starting Points</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        @for (_ of table().players; track $index) {
+            <td>{{settings!.startingGameScore}}</td>
+        }
       </tr>
-      <tr class="thick-b-x">
+      <tr class="">
         <td>Loans</td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
       </tr>
-      <tr class="thick-b-x">
+      <tr class="">
         <td>Final Score</td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
       </tr>
-      <tr class="thick-b-top thick-b-x">
+      <tr class="thick-b-top ">
         <td>Net Score</td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
       </tr>
-      <tr class="thick-b-x">
+      <tr class="">
         <td>Uma</td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
       </tr>
-      <tr class="thick-b-x">
+      <tr class="">
         <td>TOTAL</td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
       </tr>
-      <tr class="thick-b-x">
+      <tr class="">
         <td>Penalties</td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
       </tr>
-      <tr class="thick-b-top thick-b-x thick-b-bottom">
+      <tr class="thick-b-top  thick-b-bottom">
         <td>Signatures</td>
         <td></td>
         <td></td>
@@ -89,16 +86,16 @@
     <table class="round-table">
       <tr>
         <td>Round</td>
-        <td></td>
+        <td>{{roundNumber()}}</td>
       </tr>
       <tr>
         <td>Table</td>
-        <td></td>
+        <td>{{table().number}}</td>
       </tr>
     </table>
     <table class="round-table space aligner">
       <tr>
-        <td>Riichi sticks</td>
+        <td class="text-center">Riichi sticks</td>
       </tr>
       <tr>
         <td></td>
@@ -106,7 +103,7 @@
     </table>
     <table class="round-table">
       <tr>
-        <td>Referee</td>
+        <td class="text-center">Referee</td>
       </tr>
       <tr>
         <td></td>

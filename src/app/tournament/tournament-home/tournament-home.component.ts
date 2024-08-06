@@ -1,25 +1,34 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EncodingService } from '../../services/encoding.service';
 import { TournamentService } from '../tournament.service';
-import { ControlsComponent } from "../controls/controls.component";
+import { ControlsComponent } from '../controls/controls.component';
 import { JsonPipe } from '@angular/common';
 import { TableComponent } from '../table/table.component';
+import { DatesService } from '../../services/dates.service';
+import { PrintService } from '../../services/print.service';
 
 @Component({
   selector: 'app-tournament-home',
   standalone: true,
   imports: [FormsModule, ControlsComponent, JsonPipe, TableComponent],
   templateUrl: './tournament-home.component.html',
-  styleUrl: './tournament-home.component.scss'
+  styleUrl: './tournament-home.component.scss',
 })
 export class TournamentHomeComponent {
-  loadString: string = ''
+  loadString: string = '';
+  tables = viewChild<ElementRef<HTMLDivElement>>('tables');
+  printService = inject(PrintService);
+  datesService = inject(DatesService);
 
-  tournamentService = inject(TournamentService)
+  tournamentService = inject(TournamentService);
+  settings = computed(() => this.tournamentService.tournament()?.settings);
 
-loadSeating() {
-  this.tournamentService.loadTournament(this.loadString)
-}
+  loadSeating() {
+    this.tournamentService.loadTournament(this.loadString);
+  }
 
+  printTables() {
+    this.printService.printElementRef(this.tables())
+  }
 }

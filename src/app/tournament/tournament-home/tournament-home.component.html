@@ -3,16 +3,24 @@
     <div class="col-md-4 pe-0">
       <app-tournament-controls></app-tournament-controls>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 ps-0">
       <nav class="p-2 bg-secondary border-bottom border-primary">
-        <button>click me</button>
+        <button class="btn btn-secondary" (click)="printTables()">Print tables</button>
       </nav>
-      <div class="print-preview">
-        @for (round of tournamentService.tournament()?.rounds; track $index) {
-          <p>Round {{$index}}</p>
-          <p>{{round.startingTime}}</p>
-          @for (table of round.tables; track $index) {
-            <app-table></app-table>
+      <div #tables class="print-preview">
+        @for (round of tournamentService.tournament()?.rounds; track $index; let roundNumber = $index) {
+          <h2 class="text-center">Round {{ roundNumber + 1 }}</h2>
+          @let roundDuration = tournamentService.tournament()?.settings?.roundDuration;
+          @if (round.startingTime && roundDuration) {
+            <p class="text-center">
+              {{ datesService.formatDate(round.startingTime, "MMM DD YYYY") }}
+              {{ datesService.formatDate(round.startingTime, "HH:mm") }}-{{
+                datesService.addDuration(round.startingTime, roundDuration, "HH:mm")
+              }}
+            </p>
+          }
+          @for (table of round.tables; track $index; let tableNumber = $index) {
+            <app-table [table]="table" [roundNumber]="roundNumber + 1"></app-table>
           }
         }
       </div>
