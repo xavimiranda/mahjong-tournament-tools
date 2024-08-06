@@ -34,7 +34,11 @@
   </div>
 } @else {
   <div class="container">
-    <textarea class="form-control" rows="10" [(ngModel)]="loadString"></textarea>
-    <button class="btn-primary btn" (click)="loadSeating()">Load Seating</button>
+    <p>Where do you want to load the seatings from?</p>
+    <div class="d-flex align-items-center">
+      <button class="btn-primary btn" (click)="loadSeating('clip')">From the clipboard</button>
+      <p class="text-center p-0 my-0 mx-2"> or </p>
+      <button class="btn-primary btn" (click)="loadSeating('localStorage')">From the browser</button>
+    </div>
   </div>
 }

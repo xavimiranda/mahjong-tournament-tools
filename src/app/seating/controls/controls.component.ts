@@ -88,4 +88,8 @@ export class ControlsComponent {
   copyArrangement() {
     this.seatingService.extractSeatings();
   }
+saveToLocalStorage() {
+  localStorage.setItem('MTT-SEATINGS', this.seatingService.getEncodedSeatings())
+  this.toastr.success("Saved in your brower")
+}
 }

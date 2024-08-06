@@ -85,5 +85,17 @@
         <i class="fa fa-question"></i>
       </button>
     </div>
+    <p class="text-center p-0 m-0">or</p>
+    <div class="d-flex p-1">
+      <button type="button" class="btn btn-secondary w-100" (click)="saveToLocalStorage()">
+        <i class="fa fa-copy me-1"></i>Save in browser storage
+      </button>
+      <button
+        class="btn btn-info"
+        [popover]="'This will save the necessary information into your browser. This can be recalled from the Tournament tab'"
+      >
+        <i class="fa fa-question"></i>
+      </button>
+    </div>
   }
 </div>

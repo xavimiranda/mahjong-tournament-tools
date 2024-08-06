@@ -8,11 +8,12 @@ import { TableComponent } from '../table/table.component';
 import { DatesService } from '../../services/dates.service';
 import { PrintService } from '../../services/print.service';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { PlayerListComponent } from "../player-list/player-list.component";
 
 @Component({
   selector: 'app-tournament-home',
   standalone: true,
-  imports: [FormsModule, ControlsComponent, JsonPipe, TableComponent, TabsModule],
+  imports: [FormsModule, ControlsComponent, JsonPipe, TableComponent, TabsModule, PlayerListComponent],
   templateUrl: './tournament-home.component.html',
   styleUrl: './tournament-home.component.scss',
 })
@@ -30,7 +31,12 @@ export class TournamentHomeComponent {
   tournamentService = inject(TournamentService);
   settings = computed(() => this.tournamentService.tournament()?.settings);
 
-  loadSeating() {
+  async loadSeating(source: 'clip' | 'localStorage') {
+    if(source === 'clip')
+      this.loadString = await window.navigator.clipboard.readText()
+    if(source === 'localStorage')
+      this.loadString = localStorage.getItem('MTT-SEATINGS') ?? ''
+
     this.tournamentService.loadTournament(this.loadString);
   }
 

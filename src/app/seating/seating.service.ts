@@ -149,14 +149,18 @@ export class SeatingService implements OnDestroy {
 
   /** Encodes the seating information and places it in the clipboard */
   extractSeatings() {
+    const encoded = this.getEncodedSeatings()
+    navigator.clipboard.writeText(encoded);
+    this.toastr.success('Coppied to the clipboard.');
+  }
+
+  getEncodedSeatings() {
     const obj = {
       rounds: this.seatingMap()?.rounds,
       roundScores: this.seatingMap()?.roundScores,
       players: this.players(),
     };
-    const encoded = this.encodingService.encodeObject(obj);
-    navigator.clipboard.writeText(encoded);
-    this.toastr.success('Coppied to the clipboard.');
+    return this.encodingService.encodeObject(obj);
   }
 
   //#region Groups
