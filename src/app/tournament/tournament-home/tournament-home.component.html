@@ -1,13 +1,16 @@
 @if (tournamentService.tournament()) {
   <div class="row bg-light position-relative">
     <div class="col-md-4 pe-0">
-      <app-tournament-controls (onPrintPlayerList)="print('playerList')" (onPrintTables)="print('tables')"></app-tournament-controls>
+      <app-tournament-controls
+        (onPrintPlayerList)="print('playerList')"
+        (onPrintTables)="print('tables')"
+      ></app-tournament-controls>
     </div>
     <div class="col-md-8 ps-0">
       <tabset>
-        <tab heading="Player List"> 
+        <tab heading="Player List">
           <div id="playerList">
-
+            <app-player-list></app-player-list>
           </div>
         </tab>
         <tab heading="Table score cards" id="tab1">
@@ -37,7 +40,7 @@
     <p>Where do you want to load the seatings from?</p>
     <div class="d-flex align-items-center">
       <button class="btn-primary btn" (click)="loadSeating('clip')">From the clipboard</button>
-      <p class="text-center p-0 my-0 mx-2"> or </p>
+      <p class="text-center p-0 my-0 mx-2">or</p>
       <button class="btn-primary btn" (click)="loadSeating('localStorage')">From the browser</button>
     </div>
   </div>
