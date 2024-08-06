@@ -2,17 +2,25 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Round, SeatingMap, Table, Tournament } from '../models/tournament';
 import { EncodingService } from '../services/encoding.service';
 import moment from 'moment';
+import { ToastrService } from '../services/toastr.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TournamentService {
   tournament = signal<Tournament | null>(null);
-
   private encodingService = inject(EncodingService);
+  private toastr = inject(ToastrService);
 
   loadTournament(encodedSeating: string) {
-    const map = this.encodingService.decodeObject<SeatingMap>(encodedSeating);
+    let map: SeatingMap;
+    try {
+       map = this.encodingService.decodeObject<SeatingMap>(encodedSeating);
+      
+    } catch (error) {
+      this.toastr.error('Invalid string') 
+      return
+    }
 
     const rounds: Round[] = map.rounds.map((round) => {
       return {

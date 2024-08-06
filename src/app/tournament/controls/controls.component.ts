@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, computed, effect, inject } from '@angular/core';
+import { AfterViewInit, Component, computed, effect, inject, input, output } from '@angular/core';
 import { TournamentService } from '../tournament.service';
 import { FormsModule } from '@angular/forms';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
@@ -18,9 +18,11 @@ export class ControlsComponent implements AfterViewInit {
     this.hours = settings?.roundDuration.hours() || 0;
     this.minutes = settings?.roundDuration.minutes() || 0;
   }
+
   tournamentService = inject(TournamentService);
-  pointsCollapsed = false;
-  roundsCollapsed = false;
+  pointsCollapsed = true;
+  roundsCollapsed = true;
+  printCollapsed = false;
   duration = this.tournamentService.tournament()?.settings.roundDuration.toISOString().slice(2);
   hours = 0;
   minutes = 0;
@@ -43,4 +45,16 @@ export class ControlsComponent implements AfterViewInit {
       keepDatepickerOpened: true,
     };
   }
+
+  onPrintTables = output();
+  printTables() {
+    this.onPrintTables.emit();
+  }
+
+  onPrintPlayerList = output();
+  printPlayerList() {
+    this.onPrintPlayerList.emit();
+  }
+
+
 }

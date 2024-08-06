@@ -1,29 +1,35 @@
 @if (tournamentService.tournament()) {
   <div class="row bg-light position-relative">
     <div class="col-md-4 pe-0">
-      <app-tournament-controls></app-tournament-controls>
+      <app-tournament-controls (onPrintPlayerList)="print('playerList')" (onPrintTables)="print('tables')"></app-tournament-controls>
     </div>
     <div class="col-md-8 ps-0">
-      <nav class="p-2 bg-secondary border-bottom border-primary">
-        <button class="btn btn-secondary" (click)="print('tables')">Print tables</button>
-      </nav>
-      <div id="tables">
-        @for (round of tournamentService.tournament()?.rounds; track $index; let roundNumber = $index) {
-          <h2 class="text-center">Round {{ roundNumber + 1 }}</h2>
-          @let roundDuration = tournamentService.tournament()?.settings?.roundDuration;
-          @if (round.startingTime && roundDuration) {
-            <p class="text-center">
-              {{ datesService.formatDate(round.startingTime, "MMM DD YYYY") }}
-              {{ datesService.formatDate(round.startingTime, "HH:mm") }}-{{
-                datesService.addDuration(round.startingTime, roundDuration, "HH:mm")
-              }}
-            </p>
-          }
-          @for (table of round.tables; track $index; let tableNumber = $index) {
-            <app-table [table]="table" [roundNumber]="roundNumber + 1"></app-table>
-          }
-        }
-      </div>
+      <tabset>
+        <tab heading="Player List"> 
+          <div id="playerList">
+
+          </div>
+        </tab>
+        <tab heading="Table score cards" id="tab1">
+          <div id="tables">
+            @for (round of tournamentService.tournament()?.rounds; track $index; let roundNumber = $index) {
+              <h2 class="text-center">Round {{ roundNumber + 1 }}</h2>
+              @let roundDuration = tournamentService.tournament()?.settings?.roundDuration;
+              @if (round.startingTime && roundDuration) {
+                <p class="text-center">
+                  {{ datesService.formatDate(round.startingTime, "MMM DD YYYY") }}
+                  {{ datesService.formatDate(round.startingTime, "HH:mm") }}-{{
+                    datesService.addDuration(round.startingTime, roundDuration, "HH:mm")
+                  }}
+                </p>
+              }
+              @for (table of round.tables; track $index; let tableNumber = $index) {
+                <app-table [table]="table" [roundNumber]="roundNumber + 1"></app-table>
+              }
+            }
+          </div>
+        </tab>
+      </tabset>
     </div>
   </div>
 } @else {

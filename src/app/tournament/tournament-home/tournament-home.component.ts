@@ -7,11 +7,12 @@ import { JsonPipe } from '@angular/common';
 import { TableComponent } from '../table/table.component';
 import { DatesService } from '../../services/dates.service';
 import { PrintService } from '../../services/print.service';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @Component({
   selector: 'app-tournament-home',
   standalone: true,
-  imports: [FormsModule, ControlsComponent, JsonPipe, TableComponent],
+  imports: [FormsModule, ControlsComponent, JsonPipe, TableComponent, TabsModule],
   templateUrl: './tournament-home.component.html',
   styleUrl: './tournament-home.component.scss',
 })
@@ -20,6 +21,11 @@ export class TournamentHomeComponent {
   tables = viewChild<ElementRef<HTMLDivElement>>('tables');
   printService = inject(PrintService);
   datesService = inject(DatesService);
+  showTables = signal<boolean>(true);
+
+  toggleShowTables()  {
+    this.showTables.update(cur => !cur)
+  }
 
   tournamentService = inject(TournamentService);
   settings = computed(() => this.tournamentService.tournament()?.settings);

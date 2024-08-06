@@ -3,6 +3,19 @@
   @let settings = tournamentService.tournament()?.settings;
   @if (tournament && settings) {
     <div class="p-1">
+      <div (click)="printCollapsed = !printCollapsed" class="position-relative hoverable">
+        <h5>Print</h5>
+        <i
+          class="pull-right fa position-absolute top-0 end-0"
+          [class.fa-chevron-up]="!printCollapsed"
+          [class.fa-chevron-down]="printCollapsed"
+        ></i>
+      </div>
+      <div [collapse]="printCollapsed" [isAnimated]="true">
+        <button class="btn btn-secondary w-100" (click)="printTables()">Print Table Score Cards</button>
+      </div>
+    </div>
+    <div class="p-1">
       <div (click)="pointsCollapsed = !pointsCollapsed" class="position-relative hoverable">
         <h5>Points and Scoring</h5>
         <i
