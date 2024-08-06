@@ -1,4 +1,7 @@
 @media print {
+    .dont-print {
+        display: none;
+    }
     table {
         break-inside: avoid;
         break-after: auto;

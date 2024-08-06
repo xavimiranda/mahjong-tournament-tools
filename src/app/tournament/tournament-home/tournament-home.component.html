@@ -5,9 +5,9 @@
     </div>
     <div class="col-md-8 ps-0">
       <nav class="p-2 bg-secondary border-bottom border-primary">
-        <button class="btn btn-secondary" (click)="printTables()">Print tables</button>
+        <button class="btn btn-secondary" (click)="print('tables')">Print tables</button>
       </nav>
-      <div #tables class="print-preview">
+      <div id="tables">
         @for (round of tournamentService.tournament()?.rounds; track $index; let roundNumber = $index) {
           <h2 class="text-center">Round {{ roundNumber + 1 }}</h2>
           @let roundDuration = tournamentService.tournament()?.settings?.roundDuration;

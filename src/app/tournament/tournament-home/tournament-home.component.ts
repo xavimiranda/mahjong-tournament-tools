@@ -28,7 +28,7 @@ export class TournamentHomeComponent {
     this.tournamentService.loadTournament(this.loadString);
   }
 
-  printTables() {
-    this.printService.printElementRef(this.tables())
+  print(id: string) {
+      this.printService.printElem(id)
   }
 }

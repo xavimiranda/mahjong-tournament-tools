@@ -44,6 +44,9 @@ dependencies:
   ngx-bootstrap:
     specifier: ^18.0.2
     version: 18.0.2(@angular/animations@18.1.2)(@angular/common@18.1.2)(@angular/core@18.1.2)(@angular/forms@18.1.2)(rxjs@7.8.1)
+  ngx-print:
+    specifier: ^1.5.1
+    version: 1.5.1
   ngx-spinner:
     specifier: ^17.0.0
     version: 17.0.0(@angular/animations@18.1.2)(@angular/common@18.1.2)(@angular/core@18.1.2)
@@ -5861,6 +5864,12 @@ packages:
       '@angular/core': 18.1.2(rxjs@7.8.1)(zone.js@0.14.8)
       '@angular/forms': 18.1.2(@angular/common@18.1.2)(@angular/core@18.1.2)(@angular/platform-browser@18.1.2)(rxjs@7.8.1)
       rxjs: 7.8.1
+      tslib: 2.6.3
+    dev: false
+
+  /ngx-print@1.5.1:
+    resolution: {integrity: sha512-hrFMZCIAIyxXHnSWEgztJ1CQnelO306A23EVhRcbLgeZPdU8CBE6ixILTna/qf5ZbLv07vxWMm+UxbPcxNvOrA==}
+    dependencies:
       tslib: 2.6.3
     dev: false
 
