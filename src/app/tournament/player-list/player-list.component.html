@@ -1,0 +1,21 @@
+<h2 class="text-center">Players List</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>ID</th>
+      <th>Country</th>
+      <th>Team</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (player of tournamentService.tournament()?.players; track player.id) {
+      <tr>
+        <td>{{ player.name }}</td>
+        <td>{{ player.associationId }}</td>
+        <td>{{ player.country }}</td>
+        <td>{{ player.team }}</td>
+      </tr>
+    }
+  </tbody>
+</table>

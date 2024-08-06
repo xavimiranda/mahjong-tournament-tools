@@ -1,0 +1,10 @@
+@import '../table/table.component';
+
+th:first-child {
+    border-left: $normal-border;
+    border-top: $normal-border !important;
+}
+
+td:first-child {
+    text-align: center;
+}
