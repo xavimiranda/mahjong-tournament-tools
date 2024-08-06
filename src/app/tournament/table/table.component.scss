@@ -45,7 +45,9 @@ td {
         font-weight: bold;
     }
 }
-
+.xl-row {
+    height: 4rem;
+}
 
 .outer-box {
     display: flex;
@@ -57,15 +59,20 @@ td {
     justify-content: space-between;
 }
 
-.round-table {
+.small-table {
     margin: 0 .2rem;
     border: $thick-border;
+    width: 8rem;
 }
 
 .score-table {
     border: $thick-border;
+    font-size: .9rem;
+    td {
+        width: 9.3rem;
+    }
 }
 
 .aligner {
-    margin-bottom: 2.1rem;
+    margin-bottom: .3rem;
 }

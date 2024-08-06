@@ -106,7 +106,7 @@ export class SeatingService implements OnDestroy {
         id: i,
         name: csv.name,
         country: csv.country,
-        associationID: csv.associationID,
+        associationId: csv.associationId,
         team: csv.team,
       };
       csv.avoidGroups
