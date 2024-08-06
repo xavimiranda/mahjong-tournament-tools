@@ -91,5 +91,19 @@
         }
       </div>
     </div>
+    <div class="p-1">
+      <div (click)="saveCollapsed = !saveCollapsed" class="position-relative hoverable">
+        <h5>Save</h5>
+        <i
+          class="pull-right fa position-absolute top-0 end-0"
+          [class.fa-chevron-up]="!saveCollapsed"
+          [class.fa-chevron-down]="saveCollapsed"
+        ></i>
+      </div>
+      <div [collapse]="saveCollapsed" [isAnimated]="true">
+          <p>Save changes made to the tournament?</p>
+          <button type="button" class="btn btn-secondary w-100" (click)="tournamentService.saveTournamentToLocalStorage()">Save changes</button>
+      </div>
+    </div>
   }
 </div>

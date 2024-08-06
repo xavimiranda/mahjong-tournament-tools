@@ -36,5 +36,6 @@ export interface PlayerSeat {
 
 export interface Table {
     players: PlayerSeat[]
+    remainingRiichiSticks?: number
     number: number
 }

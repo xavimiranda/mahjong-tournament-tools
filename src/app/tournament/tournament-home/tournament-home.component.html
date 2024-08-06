@@ -37,11 +37,25 @@
   </div>
 } @else {
   <div class="container">
-    <p>Where do you want to load the seatings from?</p>
-    <div class="d-flex align-items-center">
-      <button class="btn-primary btn" (click)="loadSeating('clip')">From the clipboard</button>
-      <p class="text-center p-0 my-0 mx-2">or</p>
-      <button class="btn-primary btn" (click)="loadSeating('localStorage')">From the browser</button>
+    <div class="row text-center">
+      <div class="col-6">
+        <h2>New Tournaments</h2>
+        <p>Where do you want to load the seatings from?</p>
+        <div class="d-flex align-items-center justify-content-center">
+          <button class="btn-primary btn" (click)="loadSeating('clip')">From the clipboard</button>
+          <p class="text-center p-0 my-0 mx-2">or</p>
+          <button class="btn-primary btn" (click)="loadSeating('localStorage')">From the browser</button>
+        </div>
+      </div>
+      <div class="col-6">
+        <h2>Saved Tournaments</h2>
+        @if (tournamentService.savedTournamentExists()) {
+          <p>Load previously saved tournament?</p>
+          <button class="btn-primary btn" (click)="this.tournamentService.loadTournamentFromLocalStorage()">Load</button>
+        } @else {
+          <p>There are no saved tournaments in this browser</p>
+        }
+      </div>
     </div>
   </div>
 }
