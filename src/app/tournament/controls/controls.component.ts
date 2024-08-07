@@ -18,15 +18,15 @@ export class ControlsComponent implements AfterContentInit {
     const settings = this.tournamentService.tournament()?.settings;
     this.hours = settings?.roundDuration.hours() || 0;
     this.minutes = settings?.roundDuration.minutes() || 0;
-    this.duration = this.tournamentService.tournament()?.settings.roundDuration.toISOString().slice(2)
+    this.duration = this.tournamentService.tournament()?.settings.roundDuration.toISOString().slice(2);
   }
 
   tournamentService = inject(TournamentService);
   pointsCollapsed = true;
   roundsCollapsed = true;
   printCollapsed = false;
-  saveCollapsed= true;
-  duration?: string
+  saveCollapsed = true;
+  duration?: string;
   hours = 0;
   minutes = 0;
 
@@ -59,5 +59,8 @@ export class ControlsComponent implements AfterContentInit {
     this.onPrintPlayerList.emit();
   }
 
-
+  onPrintPlayersScores = output();
+  printPlayersScores() {
+    this.onPrintPlayersScores.emit();
+  }
 }

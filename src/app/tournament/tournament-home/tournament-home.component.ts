@@ -1,6 +1,5 @@
 import { Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { EncodingService } from '../../services/encoding.service';
 import { TournamentService } from '../tournament.service';
 import { ControlsComponent } from '../controls/controls.component';
 import { JsonPipe } from '@angular/common';
@@ -9,11 +8,12 @@ import { DatesService } from '../../services/dates.service';
 import { PrintService } from '../../services/print.service';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PlayerListComponent } from "../player-list/player-list.component";
+import { PlayerScoresComponent } from "../player-scores/player-scores.component";
 
 @Component({
   selector: 'app-tournament-home',
   standalone: true,
-  imports: [FormsModule, ControlsComponent, JsonPipe, TableComponent, TabsModule, PlayerListComponent],
+  imports: [FormsModule, ControlsComponent, JsonPipe, TableComponent, TabsModule, PlayerListComponent, PlayerScoresComponent],
   templateUrl: './tournament-home.component.html',
   styleUrl: './tournament-home.component.scss',
 })

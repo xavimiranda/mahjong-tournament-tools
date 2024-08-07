@@ -1,0 +1,24 @@
+<h2 class="text-center">Scores</h2>
+@let rounds = tournamentService.tournament()?.rounds;
+<table class="print-table header-row">
+  <thead>
+    <tr>
+      <th>Name</th>
+      @for (round of rounds; track $index) {
+        <th>Round {{ $index + 1 }}</th>
+      }
+      <th>Total score</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (player of tournamentService.tournament()?.players; track player.id) {
+      <tr>
+        <td>{{ player.name }}</td>
+        @for (round of rounds; track $index) {
+          <td>{{ getScoreInRound(player, $index) }}</td>
+        }
+        <td>{{ getFinalScore(player) }}</td>
+      </tr>
+    }
+  </tbody>
+</table>

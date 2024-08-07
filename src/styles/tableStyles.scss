@@ -1,0 +1,54 @@
+$thick-border: 2px solid black;
+$normal-border: 1px solid black;
+
+.print-table {
+  @mixin thick-b($side) {
+    border-#{$side}: $thick-border;
+  }
+  .thick-b-top {
+    @include thick-b(top);
+  }
+  .thick-b-left {
+    @include thick-b(left);
+  }
+  .thick-b-right {
+    @include thick-b(right);
+  }
+  .thick-b-bottom {
+    @include thick-b(bottom);
+  }
+
+  .thick-b-x {
+    @include thick-b(left);
+    @include thick-b(right);
+  }
+  border: $thick-border;
+
+  td,
+  th {
+    border: $normal-border;
+    text-align: center;
+  }
+}
+.header-column {
+  td:first-child {
+    font-weight: bold;
+    text-align: right;
+    border-right: $thick-border;
+  }
+}
+
+.header-row {
+  &:has(thead) {
+    thead > tr:first-child {
+      font-weight: bold;
+      border-bottom: $thick-border;
+    }
+  }
+  &:not(:has(thead)) {
+    tr:first-child {
+      font-weight: bold;
+      border-bottom: $thick-border;
+    }
+  }
+}

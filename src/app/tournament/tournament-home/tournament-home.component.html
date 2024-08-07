@@ -4,6 +4,7 @@
       <app-tournament-controls
         (onPrintPlayerList)="print('playerList')"
         (onPrintTables)="print('tables')"
+        (onPrintPlayersScores)="print('playerScores')"
       ></app-tournament-controls>
     </div>
     <div class="col-md-8 ps-0">
@@ -13,7 +14,7 @@
             <app-player-list></app-player-list>
           </div>
         </tab>
-        <tab heading="Table score cards" id="tab1">
+        <tab heading="Table score cards">
           <div id="tables">
             @for (round of tournamentService.tournament()?.rounds; track $index; let roundNumber = $index) {
               <h2 class="text-center">Round {{ roundNumber + 1 }}</h2>
@@ -32,6 +33,11 @@
             }
           </div>
         </tab>
+      <tab heading="Player scores">
+        <div id="playerScores">
+          <app-player-scores></app-player-scores>
+        </div>
+      </tab>
       </tabset>
     </div>
   </div>

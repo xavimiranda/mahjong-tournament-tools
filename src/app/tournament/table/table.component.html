@@ -1,6 +1,6 @@
 @let settings = tournamentService.tournament()?.settings;
 <div class="outer-box mb-4">
-  <table class="score-table">
+  <table class="score-table print-table header-column">
     <tbody>
       <!-- Row 1 -->
       <tr class="thick-b-top xl-row">
@@ -82,7 +82,7 @@
     </tbody>
   </table>
   <div class="right-tables">
-    <table class="small-table">
+    <table class="small-table print-table header-column">
       <tr>
         <td>Round</td>
         <td>{{ roundNumber() }}</td>
@@ -92,7 +92,7 @@
         <td>{{ table().number }}</td>
       </tr>
     </table>
-    <table class="small-table space aligner">
+    <table class="small-table space aligner print-table header-row">
       <tr>
         <td class="text-center">Riichi sticks</td>
       </tr>
@@ -100,7 +100,7 @@
         <td></td>
       </tr>
     </table>
-    <table class="small-table">
+    <table class="small-table print-table header-row">
       <tr>
         <td class="text-center">Referee</td>
       </tr>
