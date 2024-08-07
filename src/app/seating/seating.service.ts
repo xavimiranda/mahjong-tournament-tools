@@ -59,6 +59,9 @@ export class SeatingService implements OnDestroy {
     if (playerCount > 200 || rounds > 6)
       this.toastr.warn('Generating seats for big tournaments can take some time. Please be patient!');
 
+    if( playerCount < this.players().length) 
+      this.toastr.warn(`Not all players in the loaded list will be included in the tournament. ${this.players().length-playerCount} left out`)
+
     this.seatingMap.set(null);
     const tableCount = Math.floor(playerCount / 4);
 
@@ -148,17 +151,17 @@ export class SeatingService implements OnDestroy {
   }
 
   /** Encodes the seating information and places it in the clipboard */
-  extractSeatings() {
-    const encoded = this.getEncodedSeatings()
+  extractSeatings(playerCount: number) {
+    const encoded = this.getEncodedSeatings(playerCount)
     navigator.clipboard.writeText(encoded);
     this.toastr.success('Coppied to the clipboard.');
   }
 
-  getEncodedSeatings() {
+  getEncodedSeatings(playerCount: number) {
     const obj = {
       rounds: this.seatingMap()?.rounds,
       roundScores: this.seatingMap()?.roundScores,
-      players: this.players(),
+      players: this.players().slice(0, playerCount),
     };
     return this.encodingService.encodeObject(obj);
   }

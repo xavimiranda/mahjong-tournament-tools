@@ -54,8 +54,8 @@ export class ControlsComponent {
     await file.text().then((text) => {
       players = text.split('\n');
     });
-
-    this.playerCount = players.length;
+    players = players.filter(p => p !== '');
+    this.playerCount = players.length - 1;
 
     const leftOutPlayers = this.playerCount % 4;
     if (leftOutPlayers > 0)
@@ -70,7 +70,6 @@ export class ControlsComponent {
       header: true,
       transformHeader: this.cleanHeader,
       complete: (results, file) => {
-      console.log('complete parsing');
         this.seatingService.loadPlayers(results.data)
       },
     });
@@ -86,10 +85,11 @@ export class ControlsComponent {
   }
 
   copyArrangement() {
-    this.seatingService.extractSeatings();
+    this.seatingService.extractSeatings(this.playerCount);
   }
+
 saveToLocalStorage() {
-  localStorage.setItem('MTT-SEATINGS', this.seatingService.getEncodedSeatings())
+  localStorage.setItem('MTT-SEATINGS', this.seatingService.getEncodedSeatings(this.playerCount))
   this.toastr.success("Saved in your brower")
 }
 }
