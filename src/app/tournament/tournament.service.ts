@@ -28,7 +28,7 @@ export class TournamentService {
           const players = t.map((p) => map.players.find((player) => player.id === p)!);
           return {
             number: i + 1,
-            players: players.map((p) => {
+            seats: players.map((p) => {
               return { player: p };
             }),
           };

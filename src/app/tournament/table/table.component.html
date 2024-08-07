@@ -5,14 +5,14 @@
       <!-- Row 1 -->
       <tr class="thick-b-top xl-row">
         <td>Name</td>
-        @for (playerSeat of table().players; track playerSeat.player.id) {
+        @for (playerSeat of table().seats; track playerSeat.player.id) {
           <td>{{ playerSeat.player.name }}</td>
         }
       </tr>
       <!-- Row 2 -->
       <tr>
         <td>Id</td>
-        @for (playerSeat of table().players; track playerSeat.player.id) {
+        @for (playerSeat of table().seats; track playerSeat.player.id) {
           <td>{{ playerSeat.player.associationId }}</td>
         }
       </tr>
@@ -26,7 +26,7 @@
       <!-- Repeat rows as needed -->
       <tr class="thick-b-top">
         <td>Starting Points</td>
-        @for (_ of table().players; track $index) {
+        @for (_ of table().seats; track $index) {
           <td>{{ settings!.startingGameScore }}</td>
         }
       </tr>
