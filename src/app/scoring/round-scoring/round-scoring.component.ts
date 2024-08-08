@@ -1,8 +1,8 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { TournamentService } from '../../tournament/tournament.service';
 import { FormsModule } from '@angular/forms';
 import { NgClass, NgStyle, TitleCasePipe } from '@angular/common';
-import { PlayerSeat, SEAT_WINDS, Table } from '../../models/tournament';
+import { PlayerSeat, Round, SEAT_WINDS, Table } from '../../models/tournament';
 import { ToastrService } from '../../services/toastr.service';
 
 @Component({
@@ -13,9 +13,6 @@ import { ToastrService } from '../../services/toastr.service';
   styleUrl: './round-scoring.component.scss',
 })
 export class RoundScoringComponent implements OnInit {
-  ngOnInit(): void {
-    this.table.set(this.getTable() ?? null);
-  }
 
   SEAT_WINDS = SEAT_WINDS;
   selectedRound: number = 0;
@@ -23,19 +20,29 @@ export class RoundScoringComponent implements OnInit {
   leftOverSticks: number = 0;
   seats = signal<PlayerSeat[]>([]);
   table = signal<Table | null>(null);
-  tableIsScored = signal<boolean>(false);
   errors = signal<string[]>([]);
   validScore = signal<boolean>(false);
   tournamentService = inject(TournamentService);
+  toastr = inject(ToastrService);
 
+  ngOnInit(): void {
+    this.getTable();
+  }
+
+  /** fetches a table by its round and number from the tournament service */
   getTable() {
     const table = this.tournamentService.getTable(this.selectedRound, this.selectedTable);
     if (table) {
       this.seats.set(table.seats.map((seat) => ({ ...seat })));
-      this.tableIsScored.set(this.seats().every((seat) => seat.finalScore));
+      this.table.set(table);
     }
-    return table;
   }
+
+  /** Checks if a round has table to score, by checking if every table for that round is scored */
+  hasTablesToScore(round: Round) {
+    return !round.tables.every((t) => t.scored);
+  }
+
 
   validateTable() {
     this.validScore.set(false);
@@ -49,17 +56,20 @@ export class RoundScoringComponent implements OnInit {
     }
   }
 
-  commitScore() {
-    this.table()!.seats = this.seats();
-    this.table.update((cur) => {
-      if (cur) cur.seats = this.seats();
-      return cur;
-    });
-  }
-
   invalidate() {
     this.validScore.set(false);
   }
+
+  commitScore() {
+    this.tournamentService.commitScore(this.selectedRound, this.selectedTable, this.seats());
+    this.getTable();
+    this.toastr.info('To save your score, remember to save the tournament in your browser.\nClick me to save now!', {
+      timeOut: 10000,
+      progressBar: true,
+      onclick: () => this.tournamentService.saveTournamentToLocalStorage(),
+    });
+  }
+
   private calculateScores() {
     const seats = this.seats();
     if (!seats) return;

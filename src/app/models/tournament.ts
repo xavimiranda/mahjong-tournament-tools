@@ -49,4 +49,5 @@ export interface Table {
     seats: PlayerSeat[]
     remainingRiichiSticks?: number
     number: number
+    scored: boolean
 }

@@ -6,9 +6,14 @@
     <div class="row">
       <div class="col-md-6">
         <label>Round</label>
-        <select [(ngModel)]="selectedRound" [disabled]="this.tableIsScored()" class="form-select" (ngModelChange)="getTable()">
+        <select [(ngModel)]="selectedRound" class="form-select" (ngModelChange)="getTable()">
           @for (round of tournament.rounds; track $index) {
-            <option [ngValue]="$index">Round {{ $index + 1 }}</option>
+            <option [ngValue]="$index">
+              Round {{ $index + 1 }}
+              @if (!hasTablesToScore(round)) {
+                (scored)
+              }
+            </option>
           }
         </select>
       </div>
@@ -17,7 +22,12 @@
         <label>Table</label>
         <select [(ngModel)]="selectedTable" class="form-select" (ngModelChange)="getTable()">
           @for (table of tournament.rounds[selectedRound].tables; track table.number) {
-            <option [ngValue]="table.number">Table {{ table.number }}</option>
+            <option [ngValue]="table.number">
+              Table {{ table.number }}
+              @if (table.scored) {
+                (scored)
+              }
+            </option>
           }
         </select>
       </div>
@@ -41,18 +51,35 @@
               <tr>
                 <td>{{ seat.player.name }}</td>
                 <td>
-                  @if (!tableIsScored()) {
-                    <select class="form-select" (input)="invalidate()" [(ngModel)]="seat.wind">
+                  @if (!table()?.scored) {
+                    @if (!seat.wind) {
+                      <div class="d-flex">
+                        @for (wind of SEAT_WINDS; track $index) {
+                          <button type="button" class="btn btn-sm btn-primary" (click)="seat.wind = wind">
+                            {{ wind.substring(0, 1).toUpperCase() }}
+                          </button>
+                        }
+                      </div>
+                    } @else {
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-primary w-100"
+                        (click)="seat.wind = undefined"
+                      >
+                        {{ seat.wind | titlecase }}
+                      </button>
+                    }
+                    <!-- <select class="form-select" (input)="invalidate()" [(ngModel)]="seat.wind">
                       @for (wind of SEAT_WINDS; track $index) {
                         <option [ngValue]="wind">{{ wind | titlecase }}</option>
                       }
-                    </select>
+                    </select> -->
                   } @else {
                     {{ seat.wind | titlecase }}
                   }
                 </td>
                 <td>
-                  @if (!tableIsScored()) {
+                  @if (!table()?.scored) {
                     <input
                       type="number"
                       [(ngModel)]="seats()[$index].gameScore"
@@ -65,7 +92,7 @@
                   }
                 </td>
                 <td>
-                  @if (!tableIsScored()) {
+                  @if (!table()?.scored) {
                     <input
                       type="number"
                       [(ngModel)]="seats()[$index].loan"
@@ -87,7 +114,7 @@
         @if (!settings?.winnerRiichiSticks) {
           <label for="riichiSticks">Leftover Ricchi Sticks</label>
 
-          @if (!tableIsScored()) {
+          @if (!table()?.scored) {
             <input id="riichiSticks" type="number" [(ngModel)]="leftOverSticks" class="form-control" />
           } @else {
             <p>{{ leftOverSticks }}</p>
@@ -103,7 +130,7 @@
             </ul>
           </div>
         }
-        @if (!tableIsScored()) {
+        @if (!table()?.scored) {
           <button
             class="btn animate-color"
             [ngClass]="{ 'btn-primary': !validScore(), 'btn-success': validScore() }"
