@@ -12,13 +12,13 @@ import { Player } from '../../models/player';
 export class PlayerScoresComponent {
   tournamentService = inject(TournamentService);
 
-  getScoreInRound(player: Player, roundNumber: number): number {
+  getScoreInRound(player: Player, roundNumber: number) {
     const round = this.tournamentService.tournament()?.rounds[roundNumber];
 
     return (
       round?.tables
         .find((t) => t.seats.some((seat) => seat.player.id === player.id))
-        ?.seats.find((seat) => seat.player.id === player.id)?.finalScore || 0
+        ?.seats.find((seat) => seat.player.id === player.id)?.finalScore ?? '' 
     );
   }
 
