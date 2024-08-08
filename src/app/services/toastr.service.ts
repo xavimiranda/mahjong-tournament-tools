@@ -1,25 +1,34 @@
 import { Injectable } from '@angular/core';
 import toastr from 'toastr';
 
+
 @Injectable({
   providedIn: 'root',
 })
 export class ToastrService {
-  public success(message: string) {
-    toastr.success(message);
+  public success(message: string, overrides?: ToastrOptions) {
+    this.showToast('success', message, overrides)
   }
 
-  public warn(message: string) {
-    toastr.warning(message);
+  public info(message: string, overrides?: ToastrOptions) {
+    this.showToast('info', message, overrides)
   }
 
-  public error(message: string) {
-    toastr.error(message, '', this.getOptions());
+  public warn(message: string, overrides?: ToastrOptions) {
+    this.showToast('warning', message, overrides)
   }
 
-  private getOptions(): ToastrOptions {
+  public error(message: string, overrides?: ToastrOptions) {
+    this.showToast('error', message, overrides)
+  }
+
+  private showToast(type: ToastrType, message: string, overrides: ToastrOptions = this.getDefaultOptions()) {
+    toastr[type](message, '', overrides)
+  }
+
+  private getDefaultOptions(): ToastrOptions {
     return {
-      timeOut: 10000,
+      timeOut: 5000,
     };
   }
 }
