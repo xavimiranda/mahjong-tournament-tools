@@ -84,7 +84,7 @@
             }
           </tbody>
         </table>
-        @if (settings?.winnerRiichiSticks) {
+        @if (!settings?.winnerRiichiSticks) {
           <label for="riichiSticks">Leftover Ricchi Sticks</label>
 
           @if (!tableIsScored()) {
