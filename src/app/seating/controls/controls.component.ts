@@ -68,6 +68,7 @@ export class ControlsComponent {
     
     Papa.parse<PlayerCSV>(file, {
       header: true,
+      skipEmptyLines: true,
       transformHeader: this.cleanHeader,
       complete: (results, file) => {
         this.seatingService.loadPlayers(results.data)

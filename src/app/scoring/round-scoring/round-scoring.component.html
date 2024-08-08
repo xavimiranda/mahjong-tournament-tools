@@ -1,0 +1,133 @@
+@let tournament = tournamentService.tournament();
+@let settings = tournamentService.tournament()?.settings;
+
+@if (tournament) {
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <label>Round</label>
+        <select [(ngModel)]="selectedRound" [disabled]="this.tableIsScored()" class="form-select" (ngModelChange)="getTable()">
+          @for (round of tournament.rounds; track $index) {
+            <option [ngValue]="$index">Round {{ $index + 1 }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label>Table</label>
+        <select [(ngModel)]="selectedTable" class="form-select" (ngModelChange)="getTable()">
+          @for (table of tournament.rounds[selectedRound].tables; track table.number) {
+            <option [ngValue]="table.number">Table {{ table.number }}</option>
+          }
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      @if (table()) {
+        <table class="table my-2">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Seat Wind</th>
+              <th>Game Score</th>
+              <th>Loans</th>
+              <th>Delta</th>
+              <th>Uma</th>
+              <th>Final Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (seat of seats(); track $index) {
+              <tr>
+                <td>{{ seat.player.name }}</td>
+                <td>
+                  @if (!tableIsScored()) {
+                    <select class="form-select" (input)="invalidate()" [(ngModel)]="seat.wind">
+                      @for (wind of SEAT_WINDS; track $index) {
+                        <option [ngValue]="wind">{{ wind | titlecase }}</option>
+                      }
+                    </select>
+                  } @else {
+                    {{ seat.wind | titlecase }}
+                  }
+                </td>
+                <td>
+                  @if (!tableIsScored()) {
+                    <input
+                      type="number"
+                      [(ngModel)]="seats()[$index].gameScore"
+                      placeholder="Enter score"
+                      class="form-control"
+                      (input)="invalidate()"
+                    />
+                  } @else {
+                    {{ seat.gameScore }}
+                  }
+                </td>
+                <td>
+                  @if (!tableIsScored()) {
+                    <input
+                      type="number"
+                      [(ngModel)]="seats()[$index].loan"
+                      placeholder="Enter loan"
+                      class="form-control"
+                      (input)="invalidate()"
+                    />
+                  } @else {
+                    {{ seat.loan }}
+                  }
+                </td>
+                <td class="text-center">{{ seat.delta }}</td>
+                <td class="text-center">{{ seat.uma }}</td>
+                <td class="text-center">{{ seat.finalScore }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        @if (settings?.winnerRiichiSticks) {
+          <label for="riichiSticks">Leftover Ricchi Sticks</label>
+
+          @if (!tableIsScored()) {
+            <input id="riichiSticks" type="number" [(ngModel)]="leftOverSticks" class="form-control" />
+          } @else {
+            <p>{{ leftOverSticks }}</p>
+          }
+        }
+        @if (errors().length > 0) {
+          <div class="text-danger w-50 mx-auto my-2">
+            <h5>Errors:</h5>
+            <ul class="list-group list-group-numbered">
+              @for (error of errors(); track $index) {
+                <li class="list-group-item text-danger px-0 py-1">{{ error }}</li>
+              }
+            </ul>
+          </div>
+        }
+        @if (!tableIsScored()) {
+          <button
+            class="btn animate-color"
+            [ngClass]="{ 'btn-primary': !validScore(), 'btn-success': validScore() }"
+            (click)="validateTable()"
+          >
+            Validate
+          </button>
+          <button
+            class="btn btn-success animate-opacity"
+            [disabled]="!validScore()"
+            [ngStyle]="{ opacity: validScore() ? 1 : 0 }"
+            (click)="commitScore()"
+          >
+            Commit Score
+          </button>
+        } @else {
+          <p>This table was alread scored!</p>
+        }
+      }
+    </div>
+  </div>
+} @else {
+  <div class="container text-center">
+    <p>No tournament ready for scoring was found</p>
+    <p>Generate seatings first, and then load a tournament</p>
+  </div>
+}

@@ -1,0 +1,10 @@
+
+$short: .2s;
+$medium: .5s;
+.animate-color {
+  transition: background-color $short ease-in, color $short ease-in;
+}
+
+.animate-opacity {
+  transition: opacity $medium ease-in;
+}

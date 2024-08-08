@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (player of tournamentService.tournament()?.players; track player.id) {
+    @for (player of sortPlayers(); track player.id) {
       <tr>
         <td>{{ player.name }}</td>
         @for (round of rounds; track $index) {

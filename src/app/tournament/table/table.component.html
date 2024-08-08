@@ -18,10 +18,9 @@
       </tr>
       <tr>
         <td>Seat</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        @for (playerSeat of table().seats; track playerSeat.player.id) {
+          <td>{{ playerSeat.wind }}</td>
+        }
       </tr>
       <!-- Repeat rows as needed -->
       <tr class="thick-b-top">
@@ -32,45 +31,39 @@
       </tr>
       <tr>
         <td>Loans</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        @for (playerSeat of table().seats; track playerSeat.player.id) {
+          <td>{{ playerSeat.loan }}</td>
+        }
       </tr>
       <tr>
-        <td>Final Score</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>Final</td>
+        @for (playerSeat of table().seats; track playerSeat.player.id) {
+          <td>{{ playerSeat.gameScore }}</td>
+        }
       </tr>
       <tr class="thick-b-top">
         <td>Net Score</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        @for (playerSeat of table().seats; track playerSeat.player.id) {
+          <td>{{ playerSeat.net }}</td>
+        }
       </tr>
       <tr>
         <td>Uma</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
+        @for (playerSeat of table().seats; track playerSeat.player.id) {
+          <td>{{ playerSeat.uma }}</td>
+        }
+  </tr>
       <tr>
         <td>TOTAL</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        @for (playerSeat of table().seats; track playerSeat.player.id) {
+          <td>{{ playerSeat.finalScore }}</td>
+        }
       </tr>
       <tr>
         <td>Penalties</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        @for (playerSeat of table().seats; track playerSeat.player.id) {
+          <td>{{ playerSeat.penalties }}</td>
+        }
       </tr>
       <tr class="thick-b-top thick-b-bottom">
         <td>Signatures</td>

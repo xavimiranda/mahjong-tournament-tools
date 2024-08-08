@@ -60,12 +60,17 @@ export class TournamentService {
   savedTournamentExists() {
     return localStorage.getItem('MTT-TOURNAMENT') !== null;
   }
+
+  getTable(round: number, table: number) {
+    return this.tournament()?.rounds[round].tables.find(t => t.number === table)
+  }
 }
 
 function getTournamentDefaultSettings(): TournamentSettings {
   return {
     roundDuration: moment.duration(2, 'hours'),
     startingGameScore: 30000,
+    winnerRiichiSticks: true,
     firstPlaceUma: 15,
     secondPlaceUma: 5,
     thirdPlaceUma: -5,

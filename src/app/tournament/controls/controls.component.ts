@@ -49,6 +49,12 @@ export class ControlsComponent implements AfterContentInit {
     };
   }
 
+  checkInputs(startingCode: string, firstUma: string, secondUma: string, thirdUma: string, forthUma: string) {
+    if(!startingCode && parseInt(startingCode) <= 0) return false
+    if(!firstUma || !secondUma || !thirdUma || !forthUma) return false
+    return true
+  }
+
   onPrintTables = output();
   printTables() {
     this.onPrintTables.emit();
