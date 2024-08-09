@@ -9,11 +9,12 @@ import { PrintService } from '../../services/print.service';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PlayerListComponent } from "../player-list/player-list.component";
 import { PlayerScoresComponent } from "../player-scores/player-scores.component";
+import { PlayerTablesComponent } from "../player-tables/player-tables.component";
 
 @Component({
   selector: 'app-tournament-home',
   standalone: true,
-  imports: [FormsModule, ControlsComponent, JsonPipe, TableComponent, TabsModule, PlayerListComponent, PlayerScoresComponent],
+  imports: [FormsModule, ControlsComponent, JsonPipe, TableComponent, TabsModule, PlayerListComponent, PlayerScoresComponent, PlayerTablesComponent],
   templateUrl: './tournament-home.component.html',
   styleUrl: './tournament-home.component.scss',
 })

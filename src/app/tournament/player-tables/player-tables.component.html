@@ -1,0 +1,24 @@
+<h2 class="text-center">Tables</h2>
+@let rounds = tournamentService.tournament()?.rounds;
+<table class="print-table header-row mx-auto">
+  <thead>
+    <tr>
+      <th>Name</th>
+      @for (round of rounds; track $index) {
+        <th>Round {{ $index + 1 }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (player of tournamentService.tournament()?.players; track player.id) {
+      <tr>
+        <td>{{ player.name }}</td>
+        @for (round of rounds; track $index) {
+            @let tableNumber = getTableNumber(round, player);
+          <td [ngClass]="['table-' + tableNumber]">{{ tableNumber }}</td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>
+

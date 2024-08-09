@@ -3,6 +3,7 @@
     <div class="col-md-4 pe-0">
       <app-tournament-controls
         (onPrintPlayerList)="print('playerList')"
+        (onPrintPlayerTables)="print('playerTables')"
         (onPrintTables)="print('tables')"
         (onPrintPlayersScores)="print('playerScores')"
       ></app-tournament-controls>
@@ -12,6 +13,11 @@
         <tab heading="Player List">
           <div id="playerList">
             <app-player-list></app-player-list>
+          </div>
+        </tab>
+        <tab heading="Player Tables">
+          <div id="playerTables">
+            <app-player-tables></app-player-tables>
           </div>
         </tab>
         <tab heading="Table score cards">
@@ -33,11 +39,11 @@
             }
           </div>
         </tab>
-      <tab heading="Player scores">
-        <div id="playerScores">
-          <app-player-scores></app-player-scores>
-        </div>
-      </tab>
+        <tab heading="Player scores">
+          <div id="playerScores">
+            <app-player-scores></app-player-scores>
+          </div>
+        </tab>
       </tabset>
     </div>
   </div>
@@ -57,7 +63,9 @@
         <h2>Saved Tournaments</h2>
         @if (tournamentService.savedTournamentExists()) {
           <p>Load previously saved tournament?</p>
-          <button class="btn-primary btn" (click)="this.tournamentService.loadTournamentFromLocalStorage()">Load</button>
+          <button class="btn-primary btn" (click)="this.tournamentService.loadTournamentFromLocalStorage()">
+            Load
+          </button>
         } @else {
           <p>There are no saved tournaments in this browser</p>
         }

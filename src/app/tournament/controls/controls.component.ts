@@ -69,4 +69,9 @@ export class ControlsComponent implements AfterContentInit {
   printPlayersScores() {
     this.onPrintPlayersScores.emit();
   }
+
+  onPrintPlayersTables = output();
+  printPlayersTables() {
+    this.onPrintPlayersTables.emit();
+  }
 }

@@ -1,0 +1,7 @@
+@use 'sass:color';
+$color: hsl(44, 100%, 50%);
+@for $i from 1 through 100 {
+  .table-#{$i} {
+    background-color: adjust-hue($color, $i*30);
+  }
+}
