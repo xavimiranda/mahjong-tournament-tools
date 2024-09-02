@@ -1,26 +1,49 @@
+.list-group, .list-group-item {
+  background-color: transparent;
+}
+body[data-bs-theme="light"] {
+  .list-group-item {
+      color: $dark;
 
-
-$list-group-bg: $light;
-.list-group {
-  &-item {
-    color: $dark; 
-
-    &.active,
-    &:hover,
-    &:focus {
-      color: $primary;
-    }
-
-    &.active {
-      font-weight: 700;
-
-      &:hover {
-        background-color: $list-group-hover-bg;
+      &.active,
+      &:hover,
+      &:focus {
+        color: $dark;
       }
-    }
 
-    &.disabled:hover {
-      color: $list-group-disabled-color;
-    }
+      &.active {
+        font-weight: 700;
+
+        &:hover {
+          background-color: $list-group-hover-bg;
+        }
+      }
+
+      &.disabled:hover {
+        color: $list-group-disabled-color;
+      }
+  }
+}
+body[data-bs-theme="dark"] {
+  .list-group-item {
+      color: $light;
+
+      &.active,
+      &:hover,
+      &:focus {
+        color: $light;
+      }
+
+      &.active {
+        font-weight: 700;
+
+        &:hover {
+          background-color: $list-group-hover-bg;
+        }
+      }
+
+      &.disabled:hover {
+        color: $list-group-disabled-color;
+      }
   }
 }

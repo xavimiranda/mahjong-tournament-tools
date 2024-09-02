@@ -52,3 +52,12 @@ $normal-border: 1px solid black;
     }
   }
 }
+
+body[data-bs-theme='dark'] {
+  .print-table {
+      border-color: var(--bg-light);
+    th, td {
+      border-color: var(--bg-light);
+    }
+  }
+}

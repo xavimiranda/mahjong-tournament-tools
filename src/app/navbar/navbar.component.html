@@ -24,6 +24,59 @@
           <a class="nav-link" routerLinkActive="active" routerLink="/scoring">Scoring</a>
         </li>
       </ul>
+      <div class="ms-md-auto d-flex align-items-center">
+        <span class="theme-icon text-light me-1">
+          @if(theme == 'light') {
+            <i class="bi bi-moon"></i>
+          }@else {
+            <i class="bi bi-sun"></i>
+          }
+        </span>
+        <ng-toggle
+          [(ngModel)]="theme"
+          [values]="{
+            unchecked: 'light',
+            checked: 'dark',
+          }"
+          (change)="themeService.setTheme(theme!)"
+        ></ng-toggle>
+      </div>
+      <!-- <div class="btn-group ms-md-auto" dropdown>
+        <button
+          id="button-basic"
+          dropdownToggle
+          type="button"
+          class="btn btn-primary dropdown-toggle"
+          aria-controls="dropdown-basic"
+        >
+          <i class="bi bi-circle-half"></i>
+          <span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="button-basic">
+          <li>
+            <button
+              type="button"
+              class="dropdown-item d-flex align-items-center"
+              data-bs-theme-value="light"
+              aria-pressed="false"
+              (click)="themeService.setTheme('light')"
+            >
+              <i class="bi bi-sun"></i><span class="ms-2">Light</span>
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              class="dropdown-item d-flex align-items-center"
+              data-bs-theme-value="dark"
+              aria-pressed="true"
+              (click)="themeService.setTheme('dark')"
+            >
+              <i class="bi bi-moon"></i><span class="ms-2">Dark</span>
+            </button>
+          </li>
+        </ul>
+      </div> -->
     </div>
   </div>
 </nav>

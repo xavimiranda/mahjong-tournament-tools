@@ -32,6 +32,9 @@ dependencies:
   bootstrap:
     specifier: ^5.3.3
     version: 5.3.3(@popperjs/core@2.11.8)
+  bootstrap-icons:
+    specifier: ^1.11.3
+    version: 1.11.3
   font-awesome:
     specifier: ^4.7.0
     version: 4.7.0
@@ -41,6 +44,9 @@ dependencies:
   moment:
     specifier: ^2.30.1
     version: 2.30.1
+  ng-toggle-button:
+    specifier: ^1.5.3
+    version: 1.5.3(@angular/common@18.1.2)(@angular/core@18.1.2)
   ngx-bootstrap:
     specifier: ^18.0.2
     version: 18.0.2(@angular/animations@18.1.2)(@angular/common@18.1.2)(@angular/core@18.1.2)(@angular/forms@18.1.2)(rxjs@7.8.1)
@@ -3530,6 +3536,10 @@ packages:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
     dev: true
 
+  /bootstrap-icons@1.11.3:
+    resolution: {integrity: sha512-+3lpHrCw/it2/7lBL15VR0HEumaBss0+f/Lb6ZvHISn1mlK83jjFpooTLsMWbIjJMDjDjOExMsTxnXSIT4k4ww==}
+    dev: false
+
   /bootstrap@5.3.3(@popperjs/core@2.11.8):
     resolution: {integrity: sha512-8HLCdWgyoMguSO9o+aH+iuZ+aht+mzW0u3HIMzVu7Srrpv7EBBxTnrFlSCskwdY1+EOFQSm7uMJhNQHkdPcmjg==}
     peerDependencies:
@@ -5849,6 +5859,17 @@ packages:
   /neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: true
+
+  /ng-toggle-button@1.5.3(@angular/common@18.1.2)(@angular/core@18.1.2):
+    resolution: {integrity: sha512-B6IDa50xJKXx/1Ct2pCdFT1Z9Z8fHza6QWGxl/dv+GWq83MNULgSPd+zEl0oCSc3SYM5gWC9YV+8a4JV5tx+Sw==}
+    peerDependencies:
+      '@angular/common': '>=9.0.0'
+      '@angular/core': '>=9.0.0'
+    dependencies:
+      '@angular/common': 18.1.2(@angular/core@18.1.2)(rxjs@7.8.1)
+      '@angular/core': 18.1.2(rxjs@7.8.1)(zone.js@0.14.8)
+      tslib: 2.6.3
+    dev: false
 
   /ngx-bootstrap@18.0.2(@angular/animations@18.1.2)(@angular/common@18.1.2)(@angular/core@18.1.2)(@angular/forms@18.1.2)(rxjs@7.8.1):
     resolution: {integrity: sha512-fmbLL4dCgPOTZxBMHpJFabHtOXM02b0atHW6queXbFnSouy5jC3UQ0tdcdD2k09H2x2aeRenMt6AcmPcwyoFSg==}
