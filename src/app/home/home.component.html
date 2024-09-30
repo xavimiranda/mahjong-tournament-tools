@@ -1,14 +1,49 @@
-<div class="container pt-2">
-  <p>Welcome, here you'll find some tools to help you organize your local mahjong tournaments.</p>
-  <p>
-    The <strong>Hanchan</strong> section generates random seats based on the premise that each player should play as
-    many other players as possible.
-  </p>
-  <p>
-    The <strong>Tournament</strong> section will help you create some resources for your tournament, like table score sheets. 
-  </p>
-  <p>
-    In the <strong>Scoring</strong> section you will be able to record your player scores. 
-  </p>
-  <p>Happy gaming!</p>
+<div class="container pt-3">
+  <div class="text-center">
+    <h1>Welcome to Mahjong Tournament Tools</h1>
+    <p>Organize your local Mahjong tournaments with ease!</p>
+  </div>
+
+  <div class="row my-4">
+    <div class="col-md-4">
+      <a routerLink="/hanchan">
+        <div class="card hover-card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><strong>Hanchan Generator</strong></h5>
+            <p class="card-text">
+              Randomly assign seats, ensuring each player competes with as many others as possible.
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-4">
+      <a routerLink="/tournament">
+        <div class="card hover-card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><strong>Tournament Resources</strong></h5>
+            <p class="card-text">
+              Create essential resources like table score sheets to keep your tournament running smoothly.
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-4">
+      <a routerLink="/scoring">
+        <div class="card hover-card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><strong>Scoring</strong></h5>
+            <p class="card-text">Record and track player scores easily throughout the tournament.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <p class="lead">Happy Gaming!</p>
+  </div>
 </div>

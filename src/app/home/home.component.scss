@@ -1,0 +1,17 @@
+.hover-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: var(--hover-card-shadow); // White shadow in dark theme
+  }
+}
+a {
+    text-decoration: none;
+}
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}

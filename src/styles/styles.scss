@@ -59,3 +59,11 @@ $body-bg: $light;
 @import 'printStyles';
 @import 'tableStyles';
 @import 'animations';
+
+:root {
+  --hover-card-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+body[data-bs-theme="dark"] {
+  --hover-card-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+}
