@@ -11,7 +11,8 @@ export class PrintService {
 printElem(elemId: string) {
   const customPrintOptions: PrintOptions = new PrintOptions({
       printSectionId: elemId,
-      useExistingCss: true
+      useExistingCss: true,
+      bodyClass: 'print-body'
   });
   this.printService.print(customPrintOptions)
 }

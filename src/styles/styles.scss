@@ -67,3 +67,7 @@ $body-bg: $light;
 body[data-bs-theme="dark"] {
   --hover-card-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
 }
+
+.print-body {
+  background-color: transparent;
+}

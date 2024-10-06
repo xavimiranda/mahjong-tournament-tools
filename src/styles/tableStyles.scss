@@ -1,3 +1,6 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+// @import "../../node_modules/bootstrap/scss/variables-dark";
 $thick-border: 2px solid black;
 $normal-border: 1px solid black;
 
@@ -29,7 +32,13 @@ $normal-border: 1px solid black;
     border: $normal-border;
     text-align: center;
   }
+  &.striped {
+    tr:nth-child(even) {
+      background-color: $gray-300;
+    }
+  }
 }
+
 .header-column {
   td:first-child {
     font-weight: bold;
@@ -51,6 +60,7 @@ $normal-border: 1px solid black;
       border-bottom: $thick-border;
     }
   }
+
 }
 
 body[data-bs-theme="dark"] {
@@ -61,5 +71,11 @@ body[data-bs-theme="dark"] {
     tr {
       border-color: var(--bg-light) !important;
     }
+    &.striped {
+      tr:nth-child(even) {
+        background-color: $gray-700;
+      }
+    }
   }
+
 }
