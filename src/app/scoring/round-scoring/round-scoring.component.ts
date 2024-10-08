@@ -13,7 +13,6 @@ import { ToastrService } from '../../services/toastr.service';
   styleUrl: './round-scoring.component.scss',
 })
 export class RoundScoringComponent implements OnInit {
-
   SEAT_WINDS = SEAT_WINDS;
   selectedRound: number = 0;
   selectedTable: number = 1;
@@ -42,7 +41,6 @@ export class RoundScoringComponent implements OnInit {
   hasTablesToScore(round: Round) {
     return !round.tables.every((t) => t.scored);
   }
-
 
   validateTable() {
     this.validScore.set(false);
@@ -76,6 +74,7 @@ export class RoundScoringComponent implements OnInit {
 
     const settings = this.tournamentService.tournament()?.settings;
     if (!settings) return;
+    //Calculates net score for each seat
     seats.forEach((seat) => (seat.net = (seat.gameScore ?? 0) - (seat.loan ?? 0)));
     // Sort seats by final game score in descending order
     const sortedSeats = seats.sort((a, b) => (b.net ?? 0) - (a.net ?? 0));
@@ -122,14 +121,15 @@ export class RoundScoringComponent implements OnInit {
 
     // Assign Uma to each player
     filledPlacementGroups.forEach((group, index) => {
-      const averageUma = finalUmas[index] / group.length;
-      group.forEach((seat) => (seat.uma = averageUma));
+      const splitUma = finalUmas[index] / group.length;
+      group.forEach((seat) => (seat.uma = splitUma));
     });
 
     // Calculate final score for each player
     seats.forEach((seat) => {
-      seat.delta = (seat.net ?? 0) - (settings.startingGameScore ?? 0);
-      seat.finalScore = (seat.delta ?? 0) / 1000 + (seat.uma ?? 0);
+      seat.delta = ((seat.net ?? 0) - (settings.startingGameScore ?? 0)) / 1000;
+      seat.finalScore = (seat.delta ?? 0) + (seat.uma ?? 0) - (seat.penalties ?? 0) / 1000;
+      seat.finalScore = parseFloat(seat.finalScore.toFixed(1));
     });
   }
 

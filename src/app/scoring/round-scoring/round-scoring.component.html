@@ -41,6 +41,7 @@
               <th>Seat Wind</th>
               <th>Game Score</th>
               <th>Loans</th>
+              <th>Penalties</th>
               <th>Delta</th>
               <th>Uma</th>
               <th>Final Score</th>
@@ -102,6 +103,19 @@
                     />
                   } @else {
                     {{ seat.loan }}
+                  }
+                </td>
+                <td>
+                  @if (!table()?.scored) {
+                    <input
+                      type="number"
+                      [(ngModel)]="seats()[$index].penalties"
+                      placeholder="Enter penalties"
+                      class="form-control"
+                      (input)="invalidate()"
+                    />
+                  } @else {
+                    {{ seat.penalties }}
                   }
                 </td>
                 <td class="text-center">{{ seat.delta }}</td>
