@@ -39,6 +39,7 @@
             <tr>
               <th>Player</th>
               <th>Seat Wind</th>
+              <th>Substitute?</th>
               <th>Game Score</th>
               <th>Loans</th>
               <th>Penalties</th>
@@ -78,6 +79,15 @@
                   } @else {
                     {{ seat.wind | titlecase }}
                   }
+                </td>
+                <td class="text-center">
+                  <input
+                    type="checkbox"
+                    [disabled]="table()?.scored ?? false"
+                    class="form-check-input"
+                    [(ngModel)]="seats()[$index].isSubstitute"
+                    (change)="invalidate()"
+                  />
                 </td>
                 <td>
                   @if (!table()?.scored) {

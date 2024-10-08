@@ -31,7 +31,7 @@ export class TournamentService {
             number: i + 1,
             scored: false,
             seats: players.map((p) => {
-              return { player: p };
+              return { player: p, isSubstitute: false };
             }),
           };
         }),

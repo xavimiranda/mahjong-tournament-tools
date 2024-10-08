@@ -127,6 +127,13 @@ export class RoundScoringComponent implements OnInit {
 
     // Calculate final score for each player
     seats.forEach((seat) => {
+      if(seat.isSubstitute) {
+        seat.delta = settings.fourthPlaceUma
+        seat.uma = settings.fourthPlaceUma 
+        seat.finalScore = seat.delta + seat.uma
+        return
+      }
+
       seat.delta = ((seat.net ?? 0) - (settings.startingGameScore ?? 0)) / 1000;
       seat.finalScore = (seat.delta ?? 0) + (seat.uma ?? 0) - (seat.penalties ?? 0) / 1000;
       seat.finalScore = parseFloat(seat.finalScore.toFixed(1));

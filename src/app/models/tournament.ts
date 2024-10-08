@@ -42,7 +42,11 @@ export interface PlayerSeat {
     loan?: number
     /**the score after uma calculations */
     finalScore?: number
+    /**total penalties applied this round */
     penalties?: number
+    /**is the player a substitute? */
+    isSubstitute: boolean 
+    
 }
 
 export interface Table {
