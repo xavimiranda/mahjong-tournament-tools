@@ -12,6 +12,12 @@ type GroupType = 'avoid' | 'forbid';
   providedIn: 'root',
 })
 export class SeatingService implements OnDestroy {
+  addSubstitutePlayers(leftOutPlayers: number) {
+    for (let i = 1; i <= leftOutPlayers; i++) {
+      this.players().push({id: this.players().length, name: `Subsitute ${i}`, isSubstitute: false})
+      
+    }
+  }
   /** Signal with all the player to round seatings and their repetition score */
   seatingMap = signal<RoundResults | null>(null);
   /** Name of the ngx-spinner to use while seats are generating */
@@ -96,7 +102,7 @@ export class SeatingService implements OnDestroy {
    */
   loadPlayerNames(pNames: string[]) {
     this.players.update((curPlayers) => {
-      pNames.forEach((name, i) => curPlayers.push({ id: i, name: name }));
+      pNames.forEach((name, i) => curPlayers.push({ id: i, name: name, isSubstitute: false }));
       return curPlayers;
     });
   }
@@ -111,6 +117,7 @@ export class SeatingService implements OnDestroy {
         country: csv.country,
         associationId: csv.associationId,
         team: csv.team,
+        isSubstitute: false
       };
       csv.avoidGroups
         ?.split(' ')

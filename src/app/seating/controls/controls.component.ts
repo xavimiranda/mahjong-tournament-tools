@@ -25,13 +25,20 @@ export class ControlsComponent {
   playerCountChanged = signal<boolean>(false);
   avoidCollapsed = true
   forbidCollapsed = true
+  fillWithSubs = false
 
   private toastr = inject(ToastrService);
 
   generateSeatings() {
     const leftOutPlayers = this.playerCount % 4;
-    if (leftOutPlayers > 0)
+    if (!this.fillWithSubs && leftOutPlayers > 0)
       this.toastr.warn(`The player count is not a multiple of 4. The last ${leftOutPlayers} will be left out!`);
+
+    if(this.fillWithSubs) {
+      this.playerCount += leftOutPlayers
+      this.seatingService.addSubstitutePlayers(leftOutPlayers)
+    }
+
     this.seatingService.generateSeatings(this.playerCount, this.rounds);
   }
 
@@ -59,7 +66,7 @@ export class ControlsComponent {
 
     const leftOutPlayers = this.playerCount % 4;
     if (leftOutPlayers > 0)
-      this.toastr.warn(`The player count is not a multiple of 4. The last ${leftOutPlayers} will be left out!`);
+      this.toastr.warn(`The player count is not a multiple of 4!`);
 
     if (this.playerCount > players.length)
       this.toastr.warn(

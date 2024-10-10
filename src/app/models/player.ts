@@ -4,6 +4,7 @@ export interface Player {
   country?: string;
   associationId?: string;
   team?: string;
+  isSubstitute: boolean;
 }
 export interface PlayerCSV {
   name: string;

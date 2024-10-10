@@ -25,6 +25,7 @@
   @if (playersFile && seatingService.players()) {
     <div class="p-1">
       <h5>2 - Seating setup</h5>
+
       <label for="playerCount">Number of players</label>
       <input
         type="number"
@@ -34,8 +35,17 @@
         [(ngModel)]="playerCount"
         (change)="onPlayerCountChanged()"
       />
+
       <label for="rounds">Number of Rounds (Hanchan)</label>
       <input type="number" id="rounds" spinner class="form-control" [(ngModel)]="rounds" />
+
+      @if(playerCount%4 != 0) {
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="fillWithSubs" id="fillWithSubs" />
+          <label class="form-check-label" for="fillWithSubs">Fill incomplete table with substitute Players?</label>
+        </div>
+      }
+
       <button
         type="button"
         class="btn btn-secondary my-1 w-100"
