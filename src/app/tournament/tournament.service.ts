@@ -50,6 +50,11 @@ export class TournamentService {
       
       const tournament = this.encodingService.decodeObject<Tournament>(encodedTournament);
       tournament.settings.roundDuration = moment.duration(tournament.settings.roundDuration);
+      tournament.rounds = tournament.rounds.map(round => {
+        if(typeof round.startingTime === 'string')
+          round.startingTime = new Date(round.startingTime)
+         return round
+      })
       this.tournament.set(tournament);
     } catch (error) {
       this.toastr.error("Failed loading tournament") 
