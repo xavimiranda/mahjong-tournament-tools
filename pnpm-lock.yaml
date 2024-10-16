@@ -29,6 +29,9 @@ dependencies:
   '@angular/router':
     specifier: ^18.1.2
     version: 18.1.2(@angular/common@18.1.2)(@angular/core@18.1.2)(@angular/platform-browser@18.1.2)(rxjs@7.8.1)
+  '@fortawesome/fontawesome-free':
+    specifier: ^6.6.0
+    version: 6.6.0
   angular-cli-ghpages:
     specifier: ^2.0.1
     version: 2.0.1
@@ -38,9 +41,6 @@ dependencies:
   bootstrap-icons:
     specifier: ^1.11.3
     version: 1.11.3
-  font-awesome:
-    specifier: ^4.7.0
-    version: 4.7.0
   good-enough-golfer:
     specifier: ^0.1.1
     version: 0.1.1
@@ -2108,6 +2108,11 @@ packages:
     dev: true
     optional: true
 
+  /@fortawesome/fontawesome-free@6.6.0:
+    resolution: {integrity: sha512-60G28ke/sXdtS9KZCpZSHHkCbdsOGEhIUGlwq6yhY74UpTiToIh8np7A8yphhM4BWsvNFtIvLpi4co+h9Mr9Ow==}
+    engines: {node: '>=6'}
+    dev: false
+
   /@inquirer/checkbox@2.4.5:
     resolution: {integrity: sha512-+YlCyS6JBWeZugIvReh/YL5HJcowlklz5RykQuYKQfgWQeCJh5Us0nWcRddvIVkjmYa0I/8bwWioSLu850J8sA==}
     engines: {node: '>=18'}
@@ -3481,10 +3486,6 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /async@3.2.6:
-    resolution: {integrity: sha512-htCUDlxyyCLMgaM3xXg0C0LW2xqfuQ6p05pCEIsXuyQ+a1koYKTuBMzRNwmybfLgvJDMd0r1LTn4+E0Ti6C2AA==}
-    dev: false
-
   /autoprefixer@10.4.19(postcss@8.4.38):
     resolution: {integrity: sha512-BaENR2+zBZ8xXhM4pUaKUxlVdxZ0EZhjvbopwnXmxRUfqDmwSpC2lAi/QXvx7NRdPCo1WKEcEF6mV64si1z4Ew==}
     engines: {node: ^10 || ^12 || >=14}
@@ -3851,11 +3852,6 @@ packages:
   /colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
     dev: true
-
-  /commander@11.1.0:
-    resolution: {integrity: sha512-yPVavfyCcRhmorC7rWlkHn15b4wDVgVmBA7kV4QVBsF7kv/9TKJAbAXVTxvTnwP8HHKjRCJDClKbciiYS7p0DQ==}
-    engines: {node: '>=16'}
-    dev: false
 
   /commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
@@ -4224,10 +4220,6 @@ packages:
 
   /email-addresses@3.1.0:
     resolution: {integrity: sha512-k0/r7GrWVL32kZlGwfPNgB2Y/mMXVTq/decgLczm/j34whdaspNrZO8CnXPf1laaHxI6ptUlsnAxN+UAPw+fzg==}
-    dev: false
-
-  /email-addresses@5.0.0:
-    resolution: {integrity: sha512-4OIPYlA6JXqtVn8zpHpGiI7vE6EQOAg16aGnDMIAlZVinnoZ8208tW1hAbjWydgN/4PLTT9q+O1K6AH/vALJGw==}
     dev: false
 
   /emoji-regex@10.3.0:
@@ -4659,11 +4651,6 @@ packages:
       debug: 4.3.6
     dev: true
 
-  /font-awesome@4.7.0:
-    resolution: {integrity: sha512-U6kGnykA/6bFmg1M/oT9EkFeIYv7JlX3bozwQJWiiLz6L0w3F5vBVPxHlwyX/vtNq1ckcpRKOB9f2Qal/VtFpg==}
-    engines: {node: '>=0.10.3'}
-    dev: false
-
   /foreground-child@3.2.1:
     resolution: {integrity: sha512-PXUUyLqrR2XCWICfv6ukppP96sdFwWbNEnfEMt7jNsISjMsvaLNinAHNDYyvkyU+SZG2BTSbT5NjG+vZslfGTA==}
     engines: {node: '>=14'}
@@ -4774,20 +4761,6 @@ packages:
       filenamify: 4.3.0
       find-cache-dir: 3.3.2
       fs-extra: 8.1.0
-      globby: 6.1.0
-    dev: false
-
-  /gh-pages@6.1.1:
-    resolution: {integrity: sha512-upnohfjBwN5hBP9w2dPE7HO5JJTHzSGMV1JrLrHvNuqmjoYHg6TBrCcnEoorjG/e0ejbuvnwyKMdTyM40PEByw==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      async: 3.2.6
-      commander: 11.1.0
-      email-addresses: 5.0.0
-      filenamify: 4.3.0
-      find-cache-dir: 3.3.2
-      fs-extra: 11.2.0
       globby: 6.1.0
     dev: false
 

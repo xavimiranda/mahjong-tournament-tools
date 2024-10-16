@@ -46,9 +46,15 @@ export class TournamentService {
   }
 
   loadTournament(encodedTournament: string) {
+    try {
+      
       const tournament = this.encodingService.decodeObject<Tournament>(encodedTournament);
       tournament.settings.roundDuration = moment.duration(tournament.settings.roundDuration);
       this.tournament.set(tournament);
+    } catch (error) {
+      this.toastr.error("Failed loading tournament") 
+      console.error(error)
+    }
   }
 
   loadTournamentFromLocalStorage() {
@@ -59,7 +65,7 @@ export class TournamentService {
   }
 
   async loadTournamentFromClipboard() {
-    const clipboardData = await navigator.clipboard.readText()
+    const clipboardData = await window.navigator.clipboard.readText()
     if(clipboardData) {
       this.loadTournament(clipboardData)
     }

@@ -1,0 +1,25 @@
+<div class="container">
+  @let tournament = tournamentService.tournament();
+  @if (tournament) {
+    <div class="pb-3">
+      <p>Save current tournament state</p>
+      <div class="d-flex align-itens-baseline gap-1">
+        <input type="text" class="form-control" placeholder="Save Name" [(ngModel)]="saveName" />
+        <button class="btn btn-primary" [disabled]="saveName === ''" (click)="newSave()">Save</button>
+      </div>
+    </div>
+
+  }
+  @if(tournamentService.savedTournamentExists()) {
+    <app-vault-entry entryName="CURRENT" (onDelete)="loadMttLocalStorageKeys()" />
+  }
+
+  @for (entry of mttKeys(); track $index) {
+    <app-vault-entry [entryName]="entry" [showSetCurrent]="true" (onDelete)="loadMttLocalStorageKeys()" />
+  }
+
+  @if (saveName !== "") {
+    @let entry = saveName.toUpperCase().replaceAll(" ", "-");
+    <app-vault-entry [entryName]="entry" [isPreview]="true" (onDelete)="loadMttLocalStorageKeys()" />
+  }
+</div>

@@ -1,0 +1,42 @@
+@let name = entryName();
+@let preview = isPreview();
+<div class="d-flex align-items-baseline gap-1">
+  <p class="flex-grow-1" [class.text-muted]="preview">{{ name }}</p>
+  <button [disabled]="preview" class="btn btn-primary" title="Copy to clipboard" (click)="copyEntry()">
+    <i class="fa fa-clipboard"></i>
+  </button>
+
+  @if (showSetCurrent()) {
+    @if (!setAsCurrentConfirm()) {
+      <button [disabled]="preview" class="btn btn-primary" title="Set as CURRENT" (click)="setAsCurrent()">
+         <i class="fa-solid fa-pen-to-square"></i>
+      </button>
+    } @else {
+      <button
+        class="btn btn-danger"
+        title="Delete from browser storage"
+        (click)="confirmSetAsCurrent()"
+        (mouseleave)="startTimer(areYouSureSetCurrentTimer, setAsCurrentConfirm)"
+        (mouseenter)="stopTimer(areYouSureSetCurrentTimer)"
+      >
+        Are you sure?
+      </button>
+    }
+  }
+
+  @if (!deleteConfirm()) {
+    <button [disabled]="preview" class="btn btn-danger" title="Delete from browser storage" (click)="deleteEntry()">
+      <i class="fa fa-trash"></i>
+    </button>
+  } @else {
+    <button
+      class="btn btn-danger"
+      title="Delete from browser storage"
+      (click)="confirmDelete()"
+      (mouseleave)="startTimer(areYouSureDeleteTimer, deleteConfirm)"
+      (mouseenter)="stopTimer(areYouSureDeleteTimer)"
+    >
+      Are you sure?
+    </button>
+  }
+</div>
