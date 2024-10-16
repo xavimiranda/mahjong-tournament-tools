@@ -158,10 +158,10 @@ export class SeatingService implements OnDestroy {
   }
 
   /** Encodes the seating information and places it in the clipboard */
-  extractSeatings(playerCount: number) {
+  saveSeatingsToClipboard(playerCount: number) {
     const encoded = this.getEncodedSeatings(playerCount)
     navigator.clipboard.writeText(encoded);
-    this.toastr.success('Coppied to the clipboard.');
+    this.toastr.success('Seating arrangement successfully copied to your clipboard!')
   }
 
   getEncodedSeatings(playerCount: number) {

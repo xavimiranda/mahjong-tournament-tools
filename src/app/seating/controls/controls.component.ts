@@ -93,7 +93,7 @@ export class ControlsComponent {
   }
 
   copyArrangement() {
-    this.seatingService.extractSeatings(this.playerCount);
+    this.seatingService.saveSeatingsToClipboard(this.playerCount);
   }
 
 saveToLocalStorage() {

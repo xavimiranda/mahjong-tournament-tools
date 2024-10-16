@@ -38,7 +38,7 @@ export class TournamentHomeComponent {
     if(source === 'localStorage')
       this.loadString = localStorage.getItem('MTT-SEATINGS') ?? ''
 
-    this.tournamentService.loadTournament(this.loadString);
+    this.tournamentService.generateTournament(this.loadString);
   }
 
   print(id: string) {

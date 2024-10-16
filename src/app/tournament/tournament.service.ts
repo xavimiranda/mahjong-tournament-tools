@@ -14,7 +14,7 @@ export class TournamentService {
   private encodingService = inject(EncodingService);
   private toastr = inject(ToastrService);
 
-  loadTournament(encodedSeating: string) {
+  generateTournament(encodedSeating: string) {
     let map: SeatingMap;
     try {
       map = this.encodingService.decodeObject<SeatingMap>(encodedSeating);
@@ -45,14 +45,26 @@ export class TournamentService {
     this.tournament.set(t);
   }
 
-  loadTournamentFromLocalStorage() {
-    const t = localStorage.getItem('MTT-TOURNAMENT');
-    if (t) {
-      const tournament = this.encodingService.decodeObject<Tournament>(t);
+  loadTournament(encodedTournament: string) {
+      const tournament = this.encodingService.decodeObject<Tournament>(encodedTournament);
       tournament.settings.roundDuration = moment.duration(tournament.settings.roundDuration);
       this.tournament.set(tournament);
+  }
+
+  loadTournamentFromLocalStorage() {
+    const localStorageData = localStorage.getItem('MTT-TOURNAMENT');
+    if (localStorageData) {
+      this.loadTournament(localStorageData)
     }
   }
+
+  async loadTournamentFromClipboard() {
+    const clipboardData = await navigator.clipboard.readText()
+    if(clipboardData) {
+      this.loadTournament(clipboardData)
+    }
+  }
+
 
   saveTournamentToLocalStorage() {
     if (this.tournament())
@@ -62,6 +74,18 @@ export class TournamentService {
       } catch (error) {
         this.toastr.error('Problem ocurred saving the tournament: ' + error);
       }
+  }
+
+  saveTournamentToClipboard() {
+    if(this.tournament()) {
+      try {
+        const encoded = this.encodingService.encodeObject(this.tournament()!)
+        navigator.clipboard.writeText(encoded)
+        this.toastr.success('Tournament successfully copied to your clipboard!')
+      } catch (error) {
+        this.toastr.error('Problem enconding the tournament: ' + error);
+      }
+    }
   }
 
   savedTournamentExists() {

@@ -176,6 +176,20 @@
         >
           Save changes
         </button>
+        <button
+          type="button"
+          class="btn btn-secondary w-100"
+          (click)="tournamentService.saveTournamentToClipboard()"
+          [disabled]="
+            !checkInputs(
+              startingScore.value,
+              firstPlaceUma.value,
+              secondPlaceUma.value,
+              thirdPlaceUma.value,
+              fourthPlaceUma.value
+            )
+          "
+        >Copy to clipboard</button>
       </div>
     </div>
   }

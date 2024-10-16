@@ -49,27 +49,34 @@
   </div>
 } @else {
   <div class="container">
-    <div class="row text-center">
-      <div class="col-6">
+    <div class="row pt-2 text-center">
+
+      <div class="col-12 col-lg-6 pt-4">
         <h2>New Tournaments</h2>
         <p>Where do you want to load the seatings from?</p>
-        <div class="d-flex align-items-center justify-content-center">
-          <button class="btn-primary btn" (click)="loadSeating('clip')">From the clipboard</button>
+        <div class="d-lg-flex align-items-center justify-content-center">
+          <button class="btn-primary btn w-50" (click)="loadSeating('clip')">From the clipboard</button>
           <p class="text-center p-0 my-0 mx-2">or</p>
-          <button class="btn-primary btn" (click)="loadSeating('localStorage')">From the browser</button>
+          <button class="btn-primary btn w-50" (click)="loadSeating('localStorage')">From the browser</button>
         </div>
       </div>
-      <div class="col-6">
+
+      <div class="col-12 col-lg-6 pt-4">
         <h2>Saved Tournaments</h2>
-        @if (tournamentService.savedTournamentExists()) {
-          <p>Load previously saved tournament?</p>
-          <button class="btn-primary btn" (click)="this.tournamentService.loadTournamentFromLocalStorage()">
-            Load
+        <p>Load previously saved tournament?</p>
+        <div class="d-lg-flex align-items-center justify-content-center">
+          <button class="btn-primary btn w-50" (click)="this.tournamentService.loadTournamentFromClipboard()">
+            From the clipboard
           </button>
-        } @else {
-          <p>There are no saved tournaments in this browser</p>
-        }
+          @if (tournamentService.savedTournamentExists()) {
+            <p class="text-center p-0 my-0 mx-2">or</p>
+            <button class="btn-primary btn w-50" (click)="this.tournamentService.loadTournamentFromLocalStorage()">
+              From the Browser
+            </button>
+          }
+        </div>
       </div>
+
     </div>
   </div>
 }
